@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CertificationsList",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["title", "issuer", "date", "url", "featured", "verified"],
+    "properties": {
+      "title": { "type": "string" },
+      "issuer": { "type": "string" },
+      "date": { "type": "string" },
+      "credential_id": { "type": "string" },
+      "url": { "type": "string" },
+      "featured": { "type": "boolean" },
+      "attach_to": { "type": "string" },
+      "verified": { "type": "boolean" }
+    },
+    "additionalProperties": false
+  }
+}

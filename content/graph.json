@@ -1,0 +1,275 @@
+{
+  "nodes": [
+    {
+      "id": "inferyx",
+      "label": "Inferyx",
+      "size": "large",
+      "slug": "inferyx",
+      "kind": "lead",
+      "position": { "x": 0, "y": 0, "z": 0 }
+    },
+    {
+      "id": "aegisz",
+      "label": "AegisZ",
+      "size": "large",
+      "slug": "aegisz",
+      "kind": "project",
+      "position": { "x": -4, "y": 1.5, "z": -3 }
+    },
+    {
+      "id": "orgmind",
+      "label": "OrgMind",
+      "size": "large",
+      "slug": "orgmind",
+      "kind": "project",
+      "position": { "x": 4, "y": 1, "z": -5 }
+    },
+    {
+      "id": "threat-detection",
+      "label": "AI Threat Detection",
+      "size": "large",
+      "slug": "threat-detection",
+      "kind": "project",
+      "position": { "x": -2.5, "y": -2, "z": -7 }
+    },
+    {
+      "id": "roadsaarthi",
+      "label": "RoadSaarthi",
+      "size": "large",
+      "slug": "roadsaarthi",
+      "kind": "project",
+      "position": { "x": 3.5, "y": -2, "z": -9 }
+    },
+    {
+      "id": "phenom",
+      "label": "phenom",
+      "size": "small",
+      "slug": "lab",
+      "kind": "lab",
+      "position": { "x": 7, "y": 3, "z": -11 }
+    },
+    {
+      "id": "cert-neo4j",
+      "label": "Neo4j Certified Professional",
+      "size": "small",
+      "slug": null,
+      "kind": "cert",
+      "position": { "x": 5.0, "y": 1.6, "z": -5.4 }
+    },
+    {
+      "id": "cert-gcp-scc",
+      "label": "Google Cloud SCC",
+      "size": "small",
+      "slug": null,
+      "kind": "cert",
+      "position": { "x": -3.5, "y": -2.6, "z": -7.5 }
+    },
+    {
+      "id": "cert-cisco",
+      "label": "Cisco Junior Cybersecurity",
+      "size": "small",
+      "slug": null,
+      "kind": "cert",
+      "position": { "x": -1.5, "y": -2.7, "z": -6.8 }
+    },
+    {
+      "id": "cert-summer-analytics",
+      "label": "Summer Analytics 2025",
+      "size": "small",
+      "slug": null,
+      "kind": "cert",
+      "position": { "x": 1.1, "y": 0.5, "z": 0.2 }
+    }
+  ],
+  "edges": [
+    {
+      "source": "aegisz",
+      "target": "orgmind",
+      "type": "concept",
+      "label": "audit trail / tamper evidence",
+      "verified": false
+    },
+    {
+      "source": "aegisz",
+      "target": "orgmind",
+      "type": "concept",
+      "label": "role-based access control",
+      "verified": false
+    },
+    {
+      "source": "orgmind",
+      "target": "inferyx",
+      "type": "concept",
+      "label": "role-based access control",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "aegisz",
+      "type": "concept",
+      "label": "signed artifacts and integrity",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "aegisz",
+      "type": "concept",
+      "label": "anomaly and drift detection",
+      "verified": false
+    },
+    {
+      "source": "aegisz",
+      "target": "threat-detection",
+      "type": "concept",
+      "label": "anomaly and drift detection",
+      "verified": false
+    },
+    {
+      "source": "threat-detection",
+      "target": "roadsaarthi",
+      "type": "concept",
+      "label": "unsupervised learning on streams",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "orgmind",
+      "type": "tech",
+      "label": "FastAPI",
+      "verified": false
+    },
+    {
+      "source": "orgmind",
+      "target": "roadsaarthi",
+      "type": "tech",
+      "label": "FastAPI",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "orgmind",
+      "type": "tech",
+      "label": "Redis",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "aegisz",
+      "type": "tech",
+      "label": "React",
+      "verified": false
+    },
+    {
+      "source": "aegisz",
+      "target": "orgmind",
+      "type": "tech",
+      "label": "React",
+      "verified": false
+    },
+    {
+      "source": "orgmind",
+      "target": "roadsaarthi",
+      "type": "tech",
+      "label": "React",
+      "verified": false
+    },
+    {
+      "source": "aegisz",
+      "target": "orgmind",
+      "type": "tech",
+      "label": "Tailwind",
+      "verified": false
+    },
+    {
+      "source": "orgmind",
+      "target": "roadsaarthi",
+      "type": "tech",
+      "label": "Tailwind",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "threat-detection",
+      "type": "tech",
+      "label": "scikit-learn",
+      "verified": false
+    },
+    {
+      "source": "threat-detection",
+      "target": "roadsaarthi",
+      "type": "tech",
+      "label": "scikit-learn",
+      "verified": false
+    },
+    {
+      "source": "threat-detection",
+      "target": "phenom",
+      "type": "tech",
+      "label": "Flask",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "aegisz",
+      "type": "tech",
+      "label": "Docker Compose",
+      "verified": false
+    },
+    {
+      "source": "aegisz",
+      "target": "orgmind",
+      "type": "tech",
+      "label": "Docker Compose",
+      "verified": false
+    },
+    {
+      "source": "orgmind",
+      "target": "roadsaarthi",
+      "type": "tech",
+      "label": "Docker Compose",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "aegisz",
+      "type": "tech",
+      "label": "WebSockets",
+      "verified": false
+    },
+    {
+      "source": "aegisz",
+      "target": "roadsaarthi",
+      "type": "tech",
+      "label": "WebSockets",
+      "verified": false
+    },
+    {
+      "source": "orgmind",
+      "target": "cert-neo4j",
+      "type": "concept",
+      "label": "related: graph and Cypher concepts",
+      "verified": false
+    },
+    {
+      "source": "threat-detection",
+      "target": "cert-gcp-scc",
+      "type": "concept",
+      "label": "related: cloud threat monitoring",
+      "verified": false
+    },
+    {
+      "source": "threat-detection",
+      "target": "cert-cisco",
+      "type": "concept",
+      "label": "related: network security analysis",
+      "verified": false
+    },
+    {
+      "source": "inferyx",
+      "target": "cert-summer-analytics",
+      "type": "concept",
+      "label": "related: ML benchmarks",
+      "verified": false
+    }
+  ]
+}

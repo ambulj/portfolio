@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TimelineList",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["date", "title", "detail"],
+    "properties": {
+      "date": { "type": "string" },
+      "title": { "type": "string" },
+      "detail": { "type": "string" },
+      "kind": { "type": "string" }
+    },
+    "additionalProperties": false
+  }
+}

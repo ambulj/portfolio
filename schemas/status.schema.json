@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StatusConfig",
+  "type": "object",
+  "required": ["open_to_internships", "available_from"],
+  "properties": {
+    "open_to_internships": { "type": "boolean" },
+    "available_from": { "type": "string" }
+  },
+  "additionalProperties": false
+}

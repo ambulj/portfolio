@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SiteConfig",
+  "type": "object",
+  "required": [
+    "name",
+    "short_name",
+    "tag",
+    "location",
+    "work_mode",
+    "email_parts",
+    "calendar_url",
+    "domain",
+    "linkedin",
+    "github"
+  ],
+  "properties": {
+    "name": { "type": "string" },
+    "short_name": { "type": "string" },
+    "tag": { "type": "string" },
+    "location": { "type": "string" },
+    "work_mode": { "type": "string" },
+    "email_parts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "calendar_url": { "type": "string" },
+    "domain": { "type": "string" },
+    "linkedin": { "type": "string" },
+    "github": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

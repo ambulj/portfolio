@@ -1,0 +1,88 @@
+[
+  {
+    "title": "Neo4j Certified Professional",
+    "issuer": "Neo4j",
+    "date": "Jun 2025",
+    "url": "https://graphacademy.neo4j.com/c/de5569ae-2ad2-4aab-bd52-8826b559b81e/",
+    "featured": true,
+    "attach_to": "OrgMind",
+    "verified": true
+  },
+  {
+    "title": "Mitigate Threats and Vulnerabilities with Security Command Center (skill badge)",
+    "issuer": "Google",
+    "date": "Jun 2025 [[VERIFY: LinkedIn post says Jul 2025]]",
+    "url": "https://www.credly.com/badges/811748fa-13b8-42a1-b4b9-ba10bd22feb9/linked_in_profile",
+    "featured": true,
+    "attach_to": "AI Threat Detection",
+    "verified": false
+  },
+  {
+    "title": "Junior Cybersecurity Analyst Career Path",
+    "issuer": "Cisco",
+    "date": "Jun 2025",
+    "url": "https://www.credly.com/badges/dbdf16ff-c826-4aea-8ecf-dcfe012e118a/linked_in_profile",
+    "featured": true,
+    "attach_to": "AI Threat Detection",
+    "verified": true
+  },
+  {
+    "title": "Summer Analytics 2025 (top 25%)",
+    "issuer": "Consulting & Analytics Club, IIT Guwahati",
+    "date": "Apr 2025",
+    "url": "https://certificate.givemycertificate.com/c/2bae8ea1-ddbf-4fd1-bf74-c4035f1ee688",
+    "featured": true,
+    "attach_to": "Inferyx",
+    "verified": true
+  },
+  {
+    "title": "Summer Analytics 2026",
+    "issuer": "Consulting & Analytics Club, IIT Guwahati",
+    "date": "Apr 2026",
+    "url": "https://certificate.givemycertificate.com/c/853f0550-8241-4cd5-9aa5-380e6a19325f",
+    "featured": false,
+    "verified": true
+  },
+  {
+    "title": "Deloitte Australia — Cyber Job Simulation",
+    "issuer": "Forage",
+    "date": "Jun 2025",
+    "credential_id": "GFdR3HuoXgPbbAgaL",
+    "url": "[[PLACEHOLDER: certificate URL]]",
+    "featured": false,
+    "verified": true
+  },
+  {
+    "title": "Deloitte Australia — Data Analytics Job Simulation",
+    "issuer": "Forage",
+    "date": "Jun 2025",
+    "credential_id": "JH7GuQwbw4XADzQNS",
+    "url": "[[PLACEHOLDER: certificate URL]]",
+    "featured": false,
+    "verified": true
+  },
+  {
+    "title": "Introduction to Cybersecurity",
+    "issuer": "Cisco",
+    "date": "Jun 2025",
+    "url": "https://www.credly.com/badges/8677e3b9-26c4-4f32-93b1-595c55f0736c/linked_in_profile",
+    "featured": false,
+    "verified": true
+  },
+  {
+    "title": "Data Analysis with Python",
+    "issuer": "IBM SkillsBuild",
+    "date": "Dec 2024",
+    "url": "https://courses.yl-ptech.skillsnetwork.site/certificates/47fa7a9840ad43968538cba0ddc31df3",
+    "featured": false,
+    "verified": true
+  },
+  {
+    "title": "Basics of AI/ML workshop (with GeeksforGeeks)",
+    "issuer": "Cognizance, IIT Roorkee",
+    "date": "Nov 2024",
+    "url": "https://hyperstack.id/credential/98a70134-cbe2-4e1f-9015-7bfe84980cec",
+    "featured": false,
+    "verified": true
+  }
+]

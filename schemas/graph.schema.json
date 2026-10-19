@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GraphData",
+  "type": "object",
+  "required": ["nodes", "edges"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "size", "position"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "size": { "type": "string", "enum": ["large", "small"] },
+          "slug": { "type": ["string", "null"] },
+          "kind": { "type": "string", "enum": ["lead", "project", "lab", "cert"] },
+          "position": {
+            "type": "object",
+            "required": ["x", "y", "z"],
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "z": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "type", "label", "verified"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "type": { "type": "string", "enum": ["concept", "tech"] },
+          "label": { "type": "string" },
+          "verified": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

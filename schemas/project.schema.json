@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProjectFrontMatter",
+  "type": "object",
+  "required": [
+    "title",
+    "slug",
+    "order",
+    "summary",
+    "status",
+    "data_note",
+    "repo_url",
+    "repo_private",
+    "demo_url",
+    "demo_status",
+    "demo_note",
+    "diagram_verified",
+    "stack",
+    "metrics",
+    "changes"
+  ],
+  "properties": {
+    "title": { "type": "string" },
+    "slug": { "type": "string" },
+    "order": { "type": "integer" },
+    "summary": { "type": "string" },
+    "status": { "type": "string", "enum": ["prototype", "live", "archived"] },
+    "data_note": { "type": "string" },
+    "repo_url": { "type": ["string", "null"] },
+    "repo_private": { "type": "boolean" },
+    "demo_url": { "type": ["string", "null"] },
+    "demo_status": { "type": "string", "enum": ["live", "slow-start", "down", "none"] },
+    "demo_note": { "type": ["string", "null"] },
+    "diagram_verified": { "type": "boolean" },
+    "stack": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["measure", "value", "data", "hardware", "method", "verified"],
+        "properties": {
+          "measure": { "type": "string" },
+          "value": { "type": "string" },
+          "data": { "type": "string" },
+          "hardware": { "type": "string" },
+          "method": { "type": "string" },
+          "verified": { "type": "boolean" }
+        }
+      }
+    },
+    "changes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hardening_status": { "type": "string" },
+    "context": { "type": "string" },
+    "independent_prototype": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}
