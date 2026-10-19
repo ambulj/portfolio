@@ -8,6 +8,7 @@ import RetrospectiveBlock from '@/components/project/RetrospectiveBlock';
 import RoadSaarthiDisclaimer from '@/components/project/RoadSaarthiDisclaimer';
 import ArchitectureDiagram from '@/components/project/ArchitectureDiagram';
 import { ArrowLeft, ExternalLink, Lock, Cpu } from 'lucide-react';
+import ThreatInferencePlayground from '@/components/ml/ThreatInferencePlayground';
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -164,6 +165,24 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           verified={project.diagram_verified}
         />
       </section>
+
+      {/* Interactive Client-Side ML Anomaly Detection Engine (ML-01 to ML-04) */}
+      {(slug === 'threat-detection' || slug === 'inferyx') && (
+        <section>
+          <ThreatInferencePlayground
+            title={
+              slug === 'threat-detection'
+                ? 'MISSION HUD: REAL-TIME ANOMALY DETECTION ENGINE'
+                : 'INFERYX EDGE BENCHMARK: ONNX RUNTIME VERIFICATION'
+            }
+            subtitle={
+              slug === 'threat-detection'
+                ? 'In-browser client neural inference on 6 NetFlow cyber telemetry vectors via ONNX Runtime Web WASM SIMD.'
+                : 'Live client-side execution benchmark demonstrating sub-millisecond edge ML inference & SHA-256 weight verification.'
+            }
+          />
+        </section>
+      )}
 
       {/* 5-Column Audited Metrics Table */}
       <section>

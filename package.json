@@ -5,15 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:dev": "node scripts/check-placeholders.mjs --warn && next build",
-    "build:prod": "node scripts/check-placeholders.mjs --strict && next build && node scripts/check-email-leak.mjs",
+    "build": "node scripts/copy-wasm.mjs && next build",
+    "build:dev": "node scripts/check-placeholders.mjs --warn && node scripts/copy-wasm.mjs && next build",
+    "build:prod": "node scripts/check-placeholders.mjs --strict && node scripts/copy-wasm.mjs && next build && node scripts/check-email-leak.mjs",
+    "copy:wasm": "node scripts/copy-wasm.mjs",
+    "generate:model": "node scripts/generate-onnx-model.mjs",
     "check:content": "node --experimental-strip-types scripts/validate-content.mjs",
     "check:placeholders": "node scripts/check-placeholders.mjs",
     "check:email-leak": "node scripts/check-email-leak.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
     "test:gate1": "playwright test tests/gate1.spec.ts",
-    "test:gate2": "playwright test tests/gate2-gpu.spec.ts"
+    "test:gate2": "playwright test tests/gate2-gpu.spec.ts",
+    "test:gate3": "playwright test tests/gate3-ml.spec.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",
@@ -22,6 +25,7 @@
     "lucide-react": "1.16.0",
     "marked": "15.0.7",
     "next": "15.2.1",
+    "onnxruntime-web": "^1.21.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "tailwind-merge": "3.0.2",

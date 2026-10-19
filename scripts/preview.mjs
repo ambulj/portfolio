@@ -76,7 +76,10 @@ const MIME_TYPES = {
   '.png': 'image/png',
   '.pdf': 'application/pdf',
   '.txt': 'text/plain; charset=utf-8',
-  '.xml': 'application/xml; charset=utf-8'
+  '.xml': 'application/xml; charset=utf-8',
+  '.mjs': 'application/javascript; charset=utf-8',
+  '.wasm': 'application/wasm',
+  '.onnx': 'application/octet-stream'
 };
 
 const server = http.createServer(async (req, res) => {
