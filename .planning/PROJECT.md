@@ -1,57 +1,55 @@
-# Ambul Jaiswal — Next-Gen AI/Cybersecurity Portfolio (Futuristic Stack)
+# Ambul Jaiswal — Security ML Systems & Applied Cryptography (Research Portfolio)
 
 ## What This Is
 
-A cutting-edge personal portfolio for Ambul Jaiswal (*Data science × cybersecurity · B.Tech CSE '28*), rebuilt with a futuristic, high-tech stack. Powered by **Next.js 15** and **React 19**, the site features **WebGPU WGSL compute shaders** for high-density particle physics, client-side **in-browser ML inference via WebAssembly (ONNX Runtime Web)**, a live simulated **SOC Cyber Warfare telemetry map**, and an edge-powered **AI Research Copilot** running on Cloudflare Workers AI and Vectorize.
+An engineering and research portfolio for Ambul Jaiswal (*Data science × cybersecurity · B.Tech CSE '28*), built with an International Typographic / Swiss aesthetic (clean off-white `#F9F9FB` / obsidian `#0D0E11` with electric blue accents and auto dual-mode). It presents five verified production case studies with peer-grade technical depth, reproducible benchmarks, and architecture diagrams, while maintaining dedicated technical lab pages for client-side interactive artifacts.
 
 ## Core Value
 
-To demonstrate undeniable technical mastery in security-focused machine learning through high-performance, in-browser artifacts — custom WebGPU compute shaders, zero-server client inference, and edge-native neural assistants — while preserving strict operational integrity, zero data leakage, and rigorous honesty.
+To present Ambul's work with unmistakable human craftsmanship, academic rigor, and peer-grade technical honesty — eliminating all generic "AI-generated" sci-fi tropes (no scanlines, no CRT flicker, no DEFCON sirens, no ungrounded marketing hype) while highlighting verifiable systems depth.
 
 ## Context
 
-- **Current Foundation**: The project currently has clean static content, 5 detailed case studies (Inferyx, AegisZ, OrgMind, Threat Detection, RoadSaarthi), verified design metrics, and domain configuration for `ambul.dev`.
-- **Target Evolution**: Elevate the user experience into a futuristic, mission-critical cyberpunk/aerospace terminal aesthetic with high-density GPU computations, real client-side neural inference, and edge streaming capabilities.
-- **Target Domain**: `https://ambul.dev` (registered on Name.com, deployed to Cloudflare Pages).
+- **Current Foundation**: 5 verified case studies (Inferyx, AegisZ, OrgMind, Threat Detection, RoadSaarthi), clean Zod-validated Markdown pipeline, 100% client-side ONNX Runtime WASM inference, synthetic NetFlow SOC visualizer, and edge-native Cloudflare Workers AI copilot.
+- **Problem with Previous Iteration**: The visual design fell into the generic AI-generated "Cyberpunk/Sci-Fi HUD" trap (OLED pure black, excessive scanlines, CRT simulation, DEFCON intrusion alarms) which felt gimmicky, noisy, and unauthentic to engineering recruiters.
+- **New Target Aesthetic**: International Typographic / Swiss Style.
+  - **Dual-mode palette**: Automatic switching via `prefers-color-scheme` (Light: `#F9F9FB` background, `#111113` carbon text; Dark: `#0D0E11` obsidian background, `#ECECED` text; Accent: `#0066FF` / `#2979FF` electric blue).
+  - **Typography**: IBM Plex Sans Condensed for headings/nav, IBM Plex Serif for long-form case studies, IBM Plex Mono reserved exclusively for code, hashes, and technical specs.
+  - **Layout**: Clean editorial grid, generous whitespace, sharp 1px hairline rules, zero tacky neon glow, zero scanlines.
+  - **Structure**: Case studies are calm, readable, long-form technical reports. Interactive tools (ONNX inference playground, SOC network flow, Neural Copilot) are cleanly isolated in a dedicated `/lab` section.
 
 ## Requirements
 
 ### Active
 
-- [ ] **ARCH-01**: Next.js 15 (React 19) App Router structure with server components and edge rendering.
-- [ ] **GPU-01**: Next-gen WebGPU graphics engine with WGSL compute shaders for a 3D interactive particle constellation.
-- [ ] **GPU-02**: Graceful fallback to WebGL/Canvas for hardware/browsers without WebGPU support.
-- [ ] **ML-01**: In-browser client ML inference running via WebAssembly and ONNX Runtime Web.
-- [ ] **ML-02**: Live cryptographic signature and integrity check before loading local model weights.
-- [ ] **SOC-01**: Real-time Cyber Warfare / SOC Telemetry visualizer simulating network anomaly streams.
-- [ ] **AI-01**: Cloudflare Workers AI edge neural copilot embedded as an interactive research assistant.
-- [ ] **AI-02**: Vector embeddings of project case studies indexed in Cloudflare Vectorize for semantic retrieval.
-- [ ] **CONTENT-01**: Prerender all 5 core case studies, Lab, About, Certifications, and Colophon with honest metrics.
-- [ ] **SEC-01**: Strict Content Security Policy, zero external CDNs, subresource integrity, and edge security headers.
+- [ ] **DSGN-01**: International Typographic / Swiss dual-mode design system with pure CSS variables and zero tacky neon glow, scanlines, or CRT effects.
+- [ ] **DSGN-02**: Typography hierarchy using IBM Plex Sans (condensed headings), IBM Plex Serif (body text with 1.6 line height), and IBM Plex Mono (code/metrics only).
+- [ ] **DSGN-03**: Clean editorial navigation bar, footer with colophon and security.txt, and responsive reading measures (<= 68ch body).
+- [ ] **CASE-01**: High-craft case study layout for all 5 projects with architecture diagrams, 5-column audited metrics tables, data notes, and "What I'd change" sections.
+- [ ] **LAB-01**: Dedicated `/lab` route housing the 3D Constellation diagram, in-browser ONNX WASM playground, and SOC NetFlow visualizer in a restrained, tool-like interface.
+- [ ] **COPILOT-01**: Restrained, accessible Neural Research Copilot drawer/sheet (clean command palette & verified citations) without generic sci-fi styling.
+- [ ] **PERF-01**: Zero hydration errors, sub-100ms first paint, WCAG AA contrast (>= 4.5:1 in both light & dark modes), zero email leaks.
 
 ### Out of Scope
 
-- Heavy bloated libraries (e.g. monolithic UI component kits) — use bespoke modern Tailwind CSS + primitives.
-- Cloud-hosted heavy GPU servers for client models — all user-facing ML inference must run locally in browser WASM.
-- Commercial telemetry subscriptions — telemetry stream is realistically synthesized and simulated on client.
+- Sci-fi tropes: Scanlines, CRT overlays, DEFCON sirens, blinking green terminal cursors on body text, "CYBER-COMMAND HUD" banners.
+- Gratuitous full-screen canvas takeovers: 3D graphics must serve as a focused architectural diagram or lab tool, not an unavoidable distraction.
+- Unverified metrics or commercial telemetry subscriptions.
 
 ## Constraints
 
-- **Tech Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS, WebGPU (WGSL), ONNX Runtime Web (WASM), Cloudflare Workers AI.
-- **Security**: Strict CSP, same-origin asset loading, subresource integrity, zero cookie tracking.
-- **Performance**: 60fps WebGPU compute animations on desktop, sub-100ms first paint on content routes.
-- **Progressive Enhancement**: Full content accessibility when WebGPU is unavailable or JavaScript is disabled.
+- **Tech Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS, Three.js, ONNX Runtime Web (WASM SIMD), Cloudflare Workers AI.
+- **Accessibility**: Dual-mode WCAG AA compliance, keyboard skip links, `prefers-reduced-motion` support.
+- **Honesty Invariants**: Inferyx private repo note, RoadSaarthi prototype disclaimer, metrics methodology tables.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Next.js 15 + React 19 | High-performance React Server Components, static prerendering with selective edge functions | ✓ Good |
-| Cyber-Command HUD Theme | Pure OLED black, crisp high-density telemetry, subtle scanlines/grid toggle, monochrome with cyan/amber accents | ✓ Confirmed |
-| Split Command Deck Layout | Persistent 3D threat map / telemetry on one side, modular glass data panels with Cmd+K / CLI overlay on the other | ✓ Confirmed |
-| React Three Fiber (R3F) & WebGPU | Interactive 3D Globe & Threat Topology with live SOC attack arcs, node inspection, and WebGPU compute particles | ✓ Confirmed |
-| Hybrid AI Inference Architecture | In-browser ONNX Runtime Web (WebGPU/WASM) for zero-latency local anomaly scoring + Cloudflare Workers AI for Copilot | ✓ Confirmed |
-| Cloudflare Pages Edge Deployment | Native integration with custom domain `ambul.dev` and Cloudflare edge network | ✓ Good |
+| Swiss / International Typographic Style | High human-craft editorial aesthetic; clean off-white & obsidian, eliminates "AI generated" feel | ✓ Confirmed |
+| Auto Dual-Mode | Natural system preference detection for engineers and recruiters who read in light or dark | ✓ Confirmed |
+| Separation of Case Studies & Lab | Case studies remain focused, distraction-free reading; interactive tools live in dedicated `/lab` | ✓ Confirmed |
+| Retain Client ML & SOC Visualizer | Proves real in-browser engineering capability when framed as clean research tools | ✓ Confirmed |
 
 ---
-*Last updated: 2026-10-19 after user architectural confirmation*
+*Last updated: 2026-10-20 after user aesthetic reset*

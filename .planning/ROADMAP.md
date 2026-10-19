@@ -1,81 +1,56 @@
-# Roadmap: Ambul Jaiswal — Futuristic Portfolio
+# Roadmap: Ambul Jaiswal Portfolio (Swiss Research Edition)
 
-## Phase 1: Next.js 15 Architecture & Content Pipeline
+## Overview
 
-**Goal:** Establish the Next.js 15 App Router baseline, TypeScript configuration, Tailwind CSS OLED aesthetic, and content ingestion pipeline.
-
-### Deliverables:
-- Project structure configured with Next.js 15, React 19, TypeScript, and Tailwind CSS.
-- Static export build (`output: 'export'`) outputting to `out/` or `dist/`.
-- Layout shell, persistent background canvas wrapper, navigation, skip links, and footer.
-- Migrated content for all 5 core case studies, Lab, About, Certifications, Resume, and Colophon.
-- Verification: Clean compile, single `<h1>` per route, zero broken links, and perfect static routing.
+A phased overhaul transforming Ambul Jaiswal's portfolio from generic cyberpunk/sci-fi tropes into an International Typographic / Swiss Style research monograph. Case studies are clean, peer-grade, and distraction-free, while interactive technical systems (ONNX inference, SOC visualizer, 3D topology, copilot) live purposefully in dedicated lab interfaces.
 
 ---
 
-## Phase 2: R3F Interactive 3D Globe & Threat Topology (WebGPU Compute Particles)
+## Phase Breakdown
 
-**Goal:** Implement an interactive React Three Fiber 3D globe and SOC threat topology with live attack arcs, node inspection, and high-density WebGPU compute particles with WebGL fallback.
+### Phase 1: International Typographic Dual-Mode Design System & Core Shell
+- **Goal:** Establish the clean Swiss visual design system, auto dual-mode CSS tokens, self-hosted typography, and calm editorial layout shell.
+- **Scope:**
+  - Strip all scanline overlays, CRT effects, and cyberpunk HUD banners (`DSGN-02`).
+  - Configure dual-mode color tokens (`DSGN-01`): Light `#F9F9FB` / `#111113`, Dark `#0D0E11` / `#ECECED`, electric blue accent.
+  - Implement calm editorial navigation bar, footer with colophon and security.txt, and reading width measures (`DSGN-03`, `DSGN-04`).
+- **Exit Criteria:** Zero scanlines, verified contrast in light and dark modes, responsive layout with clean typography.
 
-### Deliverables:
-- R3F canvas wrapper with WebGPU / WebGL2 capability negotiation and device tier detection.
-- Interactive 3D cyber threat globe rendering active nodes (nodes corresponding to project architectures, threat feeds, and edge points).
-- Dynamic attack arcs and packet trajectories connecting threat nodes with live pulse shaders.
-- Custom WebGPU compute particle field with cursor gravitational lensing and turbulence.
-- Seamless automatic fallback to WebGL / 2D Canvas under `prefers-reduced-motion` or unsupported hardware.
-- Verification: Stable 60fps frame rate, zero GPU memory leaks, and accessible static SVG fallback.
+### Phase 2: Peer-Grade Case Studies & Technical Writing
+- **Goal:** Redesign all 5 project case study pages into clean, highly readable technical papers.
+- **Scope:**
+  - Restructure Inferyx, AegisZ, OrgMind, Threat Detection, and RoadSaarthi (`CASE-01`).
+  - Render architectural diagrams with precise 1px technical lines and no neon glow (`CASE-02`).
+  - Format 5-column audited metrics tables with datasets, hardware, and measurement methods (`CASE-03`).
+  - Preserve all mandatory honesty features and retrospectives (`CASE-04`).
+- **Exit Criteria:** Distraction-free reading experience, all honesty notices verified, 0 email leaks.
 
----
+### Phase 3: Research Lab (`/lab`) & Interactive Systems Suite
+- **Goal:** Unify all interactive technical artifacts into a dedicated, tool-like research lab.
+- **Scope:**
+  - Dedicated `/lab` route presenting tools with clean engineering control cards (`LAB-01`).
+  - Restrained 3D Constellation / Network diagram with calm rendering and optional toggle (`LAB-02`).
+  - In-browser ONNX WASM anomaly detection playground with live latency timers (`LAB-03`).
+  - Simulated NetFlow/Zeek cyber telemetry stream with 5-tier topology map and packet inspection drawer (`LAB-04`).
+  - Differential Privacy Laplace noise injection demo with interactive $\epsilon$ slider (`LAB-05`).
+- **Exit Criteria:** All interactive demos operational locally with zero CDN requests, sub-50ms inference, 60fps frame rate.
 
-## Phase 3: In-Browser Client ML Inference (ONNX Runtime Web WASM)
+### Phase 4: Restrained Neural Research Copilot & Utilities
+- **Goal:** Replace the full-screen terminal modal with a clean, unobtrusive slide-over research assistant.
+- **Scope:**
+  - Redesign Copilot into an accessible side drawer (`COPILOT-01`).
+  - Grounded RAG answers with clickable verified citation pills (`COPILOT-02`).
+  - Clean secondary routes: `/about`, `/certifications`, `/resume`, `/contact`, `/security`, `/colophon` (`COPILOT-03`).
+- **Exit Criteria:** Drawer opens smoothly via keyboard/button, streaming RAG citations work accurately, zero external tracking.
 
-**Goal:** Embed local machine learning inference running directly inside the visitor's browser with zero server roundtrips.
-
-### Deliverables:
-- ONNX Runtime Web (`onnxruntime-web`) integration compiled to WebAssembly.
-- Lightweight trained anomaly detection / tabular classifier model packaged in public assets.
-- Cryptographic SHA-256 integrity check verifying model weight signatures before WASM memory allocation.
-- Interactive client inference playground on `/work/inferyx` and `/work/threat-detection`: live latency benchmarking, memory usage graphing, and classification output.
-- Verification: Model loads and executes within < 50ms locally, zero network leaks of inference data.
-
----
-
-## Phase 4: Simulated Cyber Warfare / SOC Telemetry Visualizer
-
-**Goal:** Create a high-tech, mission-critical SOC telemetry radar and alert triage interface demonstrating security operational expertise.
-
-### Deliverables:
-- Interactive cyber attack topology visualizer with glowing packet vectors and node status indicators.
-- Live stream simulator generating realistic synthetic NetFlow/Zeek network log events.
-- Packet inspection slide-out drawer displaying decoded payloads, protocol headers, and isolation scores.
-- Interactive triage actions allowing visitors to investigate alerts and evaluate threat severity.
-- Verification: Responsive layout, accessible keyboard navigation, and zero impact on main thread frame rate.
-
----
-
-## Phase 5: Cloudflare Workers AI Neural Research Copilot
-
-**Goal:** Connect an edge AI assistant trained on Ambul's research papers, case studies, and code to guide recruiters and technical visitors.
-
-### Deliverables:
-- Cloudflare Pages Function / Worker API endpoint using Cloudflare Workers AI (`@cf/meta/llama-3-8b-instruct`).
-- Case studies and research documentation indexed into Cloudflare Vectorize vector embeddings.
-- HUD terminal research copilot interface with streaming token response, strict markdown rendering, and citation pills.
-- Integration of Phase 3 hidden features (terminal backtick toggle, CTF challenge, Konami intrusion mode, differential privacy blur).
-- Verification: Streaming response under 500ms TTFT, zero hallucinations of unverified facts, strict CSP compliance.
+### Phase 5: Verification, Accessibility Audit & Cloudflare Pages Edge Hardening
+- **Goal:** Comprehensive end-to-end testing, WCAG AA compliance audit, performance validation, and deployment readiness.
+- **Scope:**
+  - Playwright test suites covering all routes and interactive widgets (`PERF-01`).
+  - Automated contrast checks across light and dark modes (`A11Y-01`).
+  - Skip links and reduced-motion verification (`A11Y-02`).
+  - Static export verification with strict CSP headers (`SEC-01`).
+- **Exit Criteria:** 100% test pass rate across all gates, 0 email leaks, ready for production deployment on `ambul.dev`.
 
 ---
-
-## Phase 6: Edge Hardening, A11y Audit & Deployment to ambul.dev
-
-**Goal:** Finalize security headers, accessibility compliance, performance audits, and deploy to Cloudflare Pages on `ambul.dev`.
-
-### Deliverables:
-- Production `_headers` configuring strict Content Security Policy, HSTS, X-Content-Type-Options, and Permissions-Policy.
-- Automated Playwright and axe-core accessibility audit asserting 0 violations across all routes.
-- Lighthouse performance, accessibility, best practices, and SEO scores $\ge 90$.
-- Cloudflare Pages deployment configuration and custom domain binding for `https://ambul.dev`.
-- Final STATUS.md and README.md documentation update.
-
----
-*Roadmap defined: 2026-10-19*
+*Roadmap defined: 2026-10-20*

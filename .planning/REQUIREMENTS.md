@@ -1,106 +1,83 @@
-# Requirements: Ambul Jaiswal — Futuristic Portfolio
+# Requirements: Ambul Jaiswal Portfolio Rebuild (Swiss Research Edition)
 
-**Defined:** 2026-10-19  
-**Core Value:** To demonstrate undeniable technical mastery in security-focused machine learning through high-performance, in-browser artifacts — custom WebGPU compute shaders, zero-server client inference, and edge-native neural assistants — while preserving strict operational integrity, zero data leakage, and rigorous honesty.
-
----
+**Defined:** 2026-10-20  
+**Core Value:** Present Ambul's security-focused machine learning systems with peer-grade academic rigor, human editorial craft, and authentic systems depth — completely free of generic AI-generated sci-fi tropes.
 
 ## v1 Requirements
 
-### 1. Framework & Architecture (`ARCH`)
+### 1. Design & Typography (International Typographic / Swiss Style)
 
-- [ ] **ARCH-01**: Next.js 15 with React 19 App Router configured with TypeScript and Tailwind CSS.
-- [ ] **ARCH-02**: Static generation (`output: 'export'`) compatible with Cloudflare Pages edge deployment.
-- [ ] **ARCH-03**: Clean component hierarchy with layout shell, persistent canvas wrapper, and accessible page transitions.
-- [ ] **ARCH-04**: Deep OLED dark aesthetic with high-contrast cyber-defense color system and IBM Plex typography.
+- [ ] **DSGN-01**: Dual-mode color system via CSS custom properties on `:root` responding to `prefers-color-scheme` (Light: `#F9F9FB` canvas, `#111113` text; Dark: `#0D0E11` canvas, `#ECECED` text; Accent: `#0066FF` / `#2979FF` electric blue).
+- [ ] **DSGN-02**: Complete removal of all generic sci-fi artifacts: scanlines, CRT flickers, DEFCON sirens, and all-caps "CYBER-COMMAND HUD" banners.
+- [ ] **DSGN-03**: Self-hosted typography: IBM Plex Sans Condensed (headings/nav), IBM Plex Serif (body text, line height 1.6), and IBM Plex Mono (code/metrics only).
+- [ ] **DSGN-04**: Editorial layout grid with crisp 1px hairline rules, zero gradients/glows, and strict reading measures (<= 68ch body).
 
-### 2. 3D Graphics Engine & Threat Topology (`GPU`)
+### 2. Case Studies & Technical Writing (Peer-Grade)
 
-- [ ] **GPU-01**: React Three Fiber (R3F) context initialization with WebGPU/WebGL device capability negotiation.
-- [ ] **GPU-02**: Interactive 3D Globe & Threat Topology rendering live simulated SOC attack arcs and node inspection.
-- [ ] **GPU-03**: Custom WebGPU compute particle field with real-time cursor gravitational lensing and velocity buffers.
-- [ ] **GPU-04**: Robust automatic fallback to WebGL / 2D Canvas when WebGPU is unsupported or under `prefers-reduced-motion`.
+- [ ] **CASE-01**: Clean, readable long-form layout for all 5 core projects (Inferyx, AegisZ, OrgMind, Threat Detection, RoadSaarthi).
+- [ ] **CASE-02**: Clean SVG architecture diagrams rendered with technical drafting line weights.
+- [ ] **CASE-03**: 5-column audited metrics methodology tables with explicit dataset, hardware, and measurement methods.
+- [ ] **CASE-04**: Strict preservation of honesty features: Inferyx private repo walkthrough notice, RoadSaarthi independent prototype disclaimer, and "What I'd change" retrospectives.
 
-### 3. In-Browser Client ML Inference (`ML`)
+### 3. Interactive Research Lab (`/lab`)
 
-- [ ] **ML-01**: ONNX Runtime Web integration configured with WebAssembly (WASM) and WebGPU execution providers.
-- [ ] **ML-02**: Pre-packaged lightweight anomaly detection model running completely on client hardware.
-- [ ] **ML-03**: Client-side cryptographic integrity verification (SHA-256 / Ed25519) of model file before execution.
-- [ ] **ML-04**: Interactive model benchmark widget: latency timer, memory profile, and inference confidence output.
+- [ ] **LAB-01**: Dedicated `/lab` route housing all interactive systems artifacts in a clean, tool-like research interface.
+- [ ] **LAB-02**: Restrained 3D Constellation / Threat Topology diagram (calm, precise drafting aesthetic, optional toggle).
+- [ ] **LAB-03**: In-browser ONNX Runtime WASM client inference playground with live latency counter and anomaly probability scoring.
+- [ ] **LAB-04**: Simulated NetFlow/Zeek cyber telemetry stream with 5-tier topology map and packet inspection drawer.
+- [ ] **LAB-05**: Client-side Differential Privacy Laplace mechanism demo ($Lap(0, \Delta f / \epsilon)$) with calibrated $\epsilon$ budget slider.
 
-### 4. SOC Cyber Warfare Telemetry Visualizer (`SOC`)
+### 4. Neural Research Copilot & Clean Utilities
 
-- [ ] **SOC-01**: High-tech real-time simulated telemetry dashboard monitoring edge traffic anomalies.
-- [ ] **SOC-02**: Interactive vector topology / packet flow map with dynamic packet inspection drawer.
-- [ ] **SOC-03**: Live alert triage feed allowing visitors to flag false positives and evaluate classifier confidence.
+- [ ] **COPILOT-01**: Clean slide-over research copilot drawer (accessible dialog, focus trap, Escape to dismiss) replacing the full-screen terminal modal.
+- [ ] **COPILOT-02**: Streaming response from Cloudflare Workers AI with verified source citation pills linking to case study anchors.
+- [ ] **COPILOT-03**: Editorial navigation bar, footer with security.txt, colophon, and client-assembled contact email channel with zero scrapable mailto leaks.
 
-### 5. Edge Neural Research Copilot (`AI`)
+### 5. Performance, Accessibility & Security
 
-- [ ] **AI-01**: Cloudflare Workers AI integration exposing edge model endpoints (e.g. `@cf/meta/llama-3-8b-instruct`).
-- [ ] **AI-02**: Cloudflare Vectorize vector index populated with embeddings of Ambul's case studies and research papers.
-- [ ] **AI-03**: HUD terminal research copilot interface with streaming token response and verified source citations.
-
-### 6. Content & Integrity (`CONTENT`)
-
-- [ ] **CONTENT-01**: All 5 core case studies (Inferyx, AegisZ, OrgMind, Threat Detection, RoadSaarthi) migrated and rendered.
-- [ ] **CONTENT-02**: Preservation of honest data notes, metrics methodology tables, and "What I'd change" sections.
-- [ ] **CONTENT-03**: Dedicated routes for `/lab`, `/about`, `/certifications`, `/resume`, and `/colophon`.
-- [ ] **CONTENT-04**: View-source easter egg, interactive terminal shell, and differential privacy blur widgets integrated.
-
-### 7. Security & Edge Deployment (`SEC`)
-
-- [ ] **SEC-01**: Zero-dependency Cloudflare Pages edge configuration with strict Content Security Policy (`_headers`).
-- [ ] **SEC-02**: Zero third-party tracker cookies (`document.cookie === ''`) and zero client data leakage.
-- [ ] **SEC-03**: Custom domain verification and binding for `https://ambul.dev`.
-- [ ] **SEC-04**: Automated gate tests asserting 100% route health, 0 console errors, and WCAG AA accessibility.
-
----
+- [ ] **PERF-01**: Sub-100ms first paint on all static routes (`output: 'export'`).
+- [ ] **A11Y-01**: WCAG AA contrast compliance (>= 4.5:1) verified for both light and dark modes.
+- [ ] **A11Y-02**: Accessible keyboard skip links and full `prefers-reduced-motion` compliance.
+- [ ] **SEC-01**: Strict Content Security Policy, zero external CDNs, subresource integrity, and zero plaintext email harvesting leaks.
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Third-party hosted heavy ML APIs for basic client features | Preserves zero data leakage and client privacy; models must execute locally via WASM. |
-| Heavy component frameworks (Chakra, MUI, AntD) | Introduces CSS bloat and violates clean futuristic minimalism. |
-| User login / session tracking | The site is an open portfolio and research showcase with zero tracker cookies. |
-
----
+| CRT Scanlines & Screen Flicker | Artificial "AI-generated" sci-fi trope that harms readability and looks cheap |
+| DEFCON Alarm Sirens & Konami Intrusions | Gimmicky audio-visual interruptions that undermine serious technical credibility |
+| Monolithic Full-screen 3D Takeover | Distracts from peer-grade reading and slows down evaluation by hiring managers |
+| Commercial Telemetry Subscriptions | All telemetry streams remain clean, in-browser synthetic simulations |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ARCH-01 | Phase 1 | Pending |
-| ARCH-02 | Phase 1 | Pending |
-| ARCH-03 | Phase 1 | Pending |
-| ARCH-04 | Phase 1 | Pending |
-| CONTENT-01 | Phase 1 | Pending |
-| CONTENT-02 | Phase 1 | Pending |
-| CONTENT-03 | Phase 1 | Pending |
-| GPU-01 | Phase 2 | Pending |
-| GPU-02 | Phase 2 | Pending |
-| GPU-03 | Phase 2 | Pending |
-| GPU-04 | Phase 2 | Pending |
-| ML-01 | Phase 3 | Pending |
-| ML-02 | Phase 3 | Pending |
-| ML-03 | Phase 3 | Pending |
-| ML-04 | Phase 3 | Pending |
-| SOC-01 | Phase 4 | Pending |
-| SOC-02 | Phase 4 | Pending |
-| SOC-03 | Phase 4 | Pending |
-| AI-01 | Phase 5 | Pending |
-| AI-02 | Phase 5 | Pending |
-| AI-03 | Phase 5 | Pending |
-| CONTENT-04 | Phase 5 | Pending |
-| SEC-01 | Phase 6 | Pending |
-| SEC-02 | Phase 6 | Pending |
-| SEC-03 | Phase 6 | Pending |
-| SEC-04 | Phase 6 | Pending |
+| DSGN-01 | Phase 1 | Pending |
+| DSGN-02 | Phase 1 | Pending |
+| DSGN-03 | Phase 1 | Pending |
+| DSGN-04 | Phase 1 | Pending |
+| CASE-01 | Phase 2 | Pending |
+| CASE-02 | Phase 2 | Pending |
+| CASE-03 | Phase 2 | Pending |
+| CASE-04 | Phase 2 | Pending |
+| LAB-01  | Phase 3 | Pending |
+| LAB-02  | Phase 3 | Pending |
+| LAB-03  | Phase 3 | Pending |
+| LAB-04  | Phase 3 | Pending |
+| LAB-05  | Phase 3 | Pending |
+| COPILOT-01 | Phase 4 | Pending |
+| COPILOT-02 | Phase 4 | Pending |
+| COPILOT-03 | Phase 4 | Pending |
+| PERF-01 | Phase 5 | Pending |
+| A11Y-01 | Phase 5 | Pending |
+| A11Y-02 | Phase 5 | Pending |
+| SEC-01  | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 26 total
-- Mapped to phases: 26 (100%)
+- v1 requirements: 20 total
+- Mapped to phases: 20
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-10-19*
+*Requirements defined: 2026-10-20*
