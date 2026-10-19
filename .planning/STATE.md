@@ -14,7 +14,7 @@
 | **Phase 2** | R3F 3D Globe & Threat Topology (WebGPU Compute Particles) | Completed (Gate 2 Passed) |
 | **Phase 3** | In-Browser Client ML Inference (ONNX Runtime Web WASM) | Completed (Gate 3 Passed) |
 | **Phase 4** | Simulated Cyber Warfare / SOC Telemetry Visualizer | Completed (Gate 4 Passed) |
-| **Phase 5** | Cloudflare Workers AI Neural Research Copilot | Next up |
+| **Phase 5** | Cloudflare Workers AI Neural Research Copilot | Planned (Plan Verified & Ready) |
 | **Phase 6** | Edge Hardening, A11y Audit & Deployment to ambul.dev | Pending |
 
 ---
