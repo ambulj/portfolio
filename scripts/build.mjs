@@ -182,6 +182,53 @@ await esbuild.build({
 // --- 4. Prerendering HTML Pages ---
 console.log('[build] 4. Prerendering routes to static HTML...');
 
+// Load GitHub public repositories snapshot for build-time rendering (§9.4)
+let githubSnapshot = [];
+try {
+  githubSnapshot = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'github-snapshot.json'), 'utf8'));
+} catch (e) {
+  console.warn('[build] Could not load github-snapshot.json:', e.message);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderSnapshotItems(repos) {
+  return repos.map(repo => `
+    <li class="github-repo-item">
+      <div class="github-repo-header">
+        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name)}</a>
+        <span class="github-repo-owner">${escapeHtml(repo.owner)}</span>
+      </div>
+      <p class="github-repo-desc">${escapeHtml(repo.description || '')}</p>
+      <div class="github-repo-meta">
+        <span class="github-repo-lang">${escapeHtml(repo.language || 'Plain text')}</span>
+        <span class="github-repo-date">Pushed ${escapeHtml((repo.updated_at || '').split('T')[0])}</span>
+      </div>
+    </li>
+  `).join('\n');
+}
+
+
+function renderGitHubFeedSection() {
+  const snapshotJsonEscaped = JSON.stringify(githubSnapshot).replace(/"/g, '&quot;');
+  return `
+  <section class="github-feed-box mt-6" id="github-feed-container" data-snapshot="${snapshotJsonEscaped}">
+    <h2>Public Repositories</h2>
+    <div class="github-feed-status" id="github-feed-status">Showing the last saved list.</div>
+    <ul class="github-feed-list" id="github-feed-list">
+      ${renderSnapshotItems(githubSnapshot)}
+    </ul>
+  </section>`;
+}
+
 // Common layout components
 function renderStatusStrip() {
   if (!statusData.open_to_internships) return '';
@@ -205,6 +252,7 @@ function renderNav(activePath) {
         </a>
         <ul class="nav-links">
           <li><a href="/work" ${activePath.startsWith('/work') ? 'aria-current="page"' : ''}>Work</a></li>
+          <li><a href="/lab" ${activePath === '/lab' ? 'aria-current="page"' : ''}>Lab</a></li>
           <li><a href="/about" ${activePath === '/about' ? 'aria-current="page"' : ''}>About</a></li>
           <li><a href="/certifications" ${activePath === '/certifications' ? 'aria-current="page"' : ''}>Certifications</a></li>
           <li><a href="/resume" ${activePath === '/resume' ? 'aria-current="page"' : ''}>Resume</a></li>
@@ -217,6 +265,16 @@ function renderNav(activePath) {
           <span class="toggle-indicator" aria-hidden="true"></span>
           <span class="toggle-label">Reduce 3D</span>
         </button>
+        <div class="sound-toggle-wrapper">
+          <button type="button" class="toggle-switch" id="sound-toggle" aria-pressed="false" aria-haspopup="true" aria-expanded="false" aria-label="Toggle UI and ambient sound">
+            <span class="toggle-indicator" aria-hidden="true"></span>
+            <span class="toggle-label">Sound: OFF</span>
+          </button>
+          <div class="sound-menu-popup" id="sound-menu-popup" hidden>
+            <button type="button" id="sound-ui-btn" aria-pressed="false">UI Tick [OFF]</button>
+            <button type="button" id="sound-ambient-btn" aria-pressed="false">Ambient [OFF]</button>
+          </div>
+        </div>
       </div>
     </nav>
   </header>`;
@@ -232,6 +290,7 @@ function renderFooter() {
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/work">Work</a></li>
+          <li><a href="/lab">Lab</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/certifications">Certifications</a></li>
           <li><a href="/resume">Resume</a></li>
@@ -301,12 +360,27 @@ function renderHtmlDocument({ title, metaDescription, canonicalPath, content, ac
   <link rel="canonical" href="${canonicalPath}">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.svg">
+
+  <!-- Open Graph & Twitter Cards (§8.2, §12) -->
+  <meta property="og:title" content="${fullTitle}">
+  <meta property="og:description" content="${metaDescription}">
+  <meta property="og:url" content="https://${siteData.domain || 'ambul.dev'}${canonicalPath}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${fullTitle}">
+  <meta name="twitter:description" content="${metaDescription}">
+  <meta name="twitter:image" content="/og.png">
+
   <link rel="preload" href="/fonts/IBMPlexSansCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/IBMPlexSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/main.css">
   <script type="module" src="/assets/main.js"></script>
 </head>
 <body>
+  <div id="wipe-line" class="wipe-line" aria-hidden="true"></div>
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="route-announcer" class="sr-only" aria-live="polite"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   ${renderNav(activePath)}
   <main id="main-content">
@@ -342,7 +416,7 @@ const projectIndexList = caseStudyProjects
 
 const homeContent = `
 <div class="home-viewport">
-  <div class="constellation-container" id="constellation-canvas-container" data-active-slug="inferyx">
+  <div class="constellation-container scene-home" id="constellation-canvas-container" data-active-slug="inferyx">
     <div class="constellation-fallback" id="constellation-static-fallback">
       ${staticSvgHome}
     </div>
@@ -370,6 +444,7 @@ writeRoute('/', renderHtmlDocument({
   activePath: '/'
 }));
 
+
 // 4.2 Work Index (/work)
 const workItemsHtml = caseStudyProjects
   .map(p => `
@@ -388,6 +463,7 @@ const workIndexContent = `
   <div class="work-list mt-6">
     ${workItemsHtml}
   </div>
+  ${renderGitHubFeedSection()}
 </div>`;
 
 writeRoute('/work', renderHtmlDocument({
@@ -521,6 +597,106 @@ for (const p of projects) {
     activePath: `/work/${p.meta.slug}`
   }));
 }
+
+// 4.3b Lab Route (/lab) - phenom only (§5, §7.3)
+const phenomProject = projects.find(p => p.meta.slug === 'phenom');
+if (phenomProject) {
+  const diagramSvg = getDiagramSvg('phenom', phenomProject.meta.diagram_verified);
+  const metricsRows = phenomProject.meta.metrics
+    .map(m => `
+    <tr>
+      <td>${m.measure}</td>
+      <td><strong>${m.value}</strong></td>
+      <td>${m.data}</td>
+      <td>${m.hardware}</td>
+      <td>${m.method}</td>
+    </tr>`)
+    .join('\n');
+
+  const stackHtml = Object.entries(phenomProject.meta.stack || {})
+    .map(([group, items]) => `
+    <div class="stack-group">
+      <span class="stack-group-title">${group}:</span>
+      <span class="stack-group-items">${items.join(', ')}</span>
+    </div>`)
+    .join('\n');
+
+  const changesList = phenomProject.meta.changes
+    .map(c => `<li>${c}</li>`)
+    .join('\n');
+
+  const repoHtml = phenomProject.meta.repo_url
+    ? `<div class="mt-4"><a href="${phenomProject.meta.repo_url}" target="_blank" rel="noopener noreferrer">View repository on GitHub</a></div>`
+    : '';
+
+  const labContent = `
+  <div class="container">
+    <div class="case-study-layout">
+      <!-- Pinned Architecture Diagram Column -->
+      <aside class="pinned-diagram-column" aria-label="Architecture diagram">
+        <div class="diagram-header">
+          <div class="diagram-title">System Architecture</div>
+          ${!phenomProject.meta.diagram_verified ? '<span class="draft-tag">draft diagram</span>' : ''}
+        </div>
+        <div class="diagram-viewport">
+          ${diagramSvg}
+        </div>
+      </aside>
+
+      <!-- Content Column -->
+      <article class="case-study-content">
+        <h1>Lab — phenom</h1>
+        <p class="project-summary">${phenomProject.meta.summary}</p>
+
+        <div class="data-note-box">
+          <strong>Honest framing:</strong> ${phenomProject.meta.data_note}
+        </div>
+
+        <section class="case-study-body" data-arch-part="1">
+          ${phenomProject.html}
+        </section>
+
+        <h2>Results</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Measure</th>
+              <th scope="col">Value</th>
+              <th scope="col">Data</th>
+              <th scope="col">Hardware</th>
+              <th scope="col">Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${metricsRows}
+          </tbody>
+        </table>
+
+        <section class="what-i-would-change">
+          <h3>What I'd change</h3>
+          <ul>
+            ${changesList}
+          </ul>
+        </section>
+
+        <section class="stack-section">
+          <h2>Stack</h2>
+          ${stackHtml}
+          ${repoHtml}
+        </section>
+      </article>
+    </div>
+  </div>`;
+
+  writeRoute('/lab', renderHtmlDocument({
+    title: 'Lab — phenom',
+    metaDescription: `phenom: ${phenomProject.meta.summary}`,
+    canonicalPath: '/lab',
+    content: labContent,
+    activePath: '/lab'
+  }));
+}
+
 
 // 4.4 About Route (/about)
 const timelineItemsHtml = timelineData
@@ -808,6 +984,13 @@ const securityContent = `
     <li><strong>Cloudflare Web Analytics:</strong> <code>https://static.cloudflareinsights.com</code> and <code>https://cloudflareinsights.com</code> — Cookie-free, privacy-preserving metrics.</li>
     <li><strong>GitHub API:</strong> <code>https://api.github.com</code> — Used in Phase 2 for public repository metadata.</li>
   </ul>
+
+  <div class="section-divider mt-6 mb-6" id="live-header-checker">
+    <h2>Live Header Verification</h2>
+    <p class="text-quiet mb-4">Verify HTTP response headers delivered by this origin in real-time via same-origin HEAD request.</p>
+    <button type="button" class="btn btn-primary" id="check-headers-btn">Check this page</button>
+    <div id="header-check-results" class="mt-4" aria-live="polite"></div>
+  </div>
 </div>`;
 
 writeRoute('/security', renderHtmlDocument({
@@ -839,6 +1022,12 @@ writeRoute('/404', renderHtmlDocument({
 
 // --- 5. Generate Static Assets: _headers, _redirects, sitemap.xml, robots.txt, security.txt ---
 console.log('[build] 5. Writing configuration and meta files...');
+
+// Copy og.png if present
+if (fs.existsSync(path.join(PUBLIC_DIR, 'og.png'))) {
+  fs.copyFileSync(path.join(PUBLIC_DIR, 'og.png'), path.join(DIST_DIR, 'og.png'));
+  console.log('[build] Copied public/og.png -> dist/og.png');
+}
 
 const headersContent = `/*
   Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.github.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
@@ -888,6 +1077,7 @@ const sitemapUrls = [
   '/work/orgmind',
   '/work/threat-detection',
   '/work/roadsaarthi',
+  '/lab',
   '/about',
   '/certifications',
   '/resume',
@@ -895,6 +1085,7 @@ const sitemapUrls = [
   '/demos',
   '/security'
 ];
+
 
 const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

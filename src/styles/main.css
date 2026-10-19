@@ -928,6 +928,288 @@ textarea {
   color: var(--quiet);
 }
 
+/* --- Phase 2: Interaction Layer Styles (§9) --- */
+
+/* View Transitions (§9.1) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+}
+
+/* Single Wipe Line (§9.1) */
+.wipe-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--mark);
+  transform: translateX(-100%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.wipe-line.animate-wipe {
+  animation: wipeAcross 350ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes wipeAcross {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Custom Cursor (§9.2) */
+.has-custom-cursor,
+.has-custom-cursor body,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor .diag-part {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background-color: transparent;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate3d(-100px, -100px, 0);
+  margin-left: -5px;
+  margin-top: -5px;
+  transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, border-radius 0.15s ease, opacity 0.15s ease;
+}
+
+.custom-cursor.cursor-hover {
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
+  background-color: var(--mark);
+  border-color: var(--mark);
+  opacity: 0.85;
+}
+
+.custom-cursor.cursor-text {
+  width: 2px;
+  height: 18px;
+  margin-left: -1px;
+  margin-top: -9px;
+  border-radius: 1px;
+  background-color: var(--ink);
+  border: none;
+}
+
+.custom-cursor.cursor-hidden {
+  display: none !important;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  .has-custom-cursor,
+  .has-custom-cursor body {
+    cursor: auto !important;
+  }
+}
+
+/* Pinned-Diagram Highlighting (§9.1 & §7.3) */
+.diag-part {
+  cursor: pointer;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease, fill 0.2s ease;
+}
+
+.diag-part-highlight rect {
+  stroke: var(--mark) !important;
+  stroke-width: 2.5px !important;
+  fill: var(--surface) !important;
+}
+
+.diag-part-highlight text {
+  fill: var(--ink) !important;
+  font-weight: 600 !important;
+}
+
+.step-highlight {
+  border-left: 2px solid var(--mark);
+  padding-left: 8px;
+  transition: border-color 0.2s ease, padding 0.2s ease;
+}
+
+/* Sound Navigation UI (§9.3) */
+.sound-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.sound-menu-popup {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 6px;
+  background-color: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 100;
+  min-width: 140px;
+}
+
+.sound-menu-popup button {
+  width: 100%;
+  text-align: left;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.sound-menu-popup button:hover {
+  background-color: var(--surface);
+}
+
+.sound-menu-popup button[aria-pressed="true"] {
+  border-color: var(--mark);
+  color: var(--mark);
+}
+
+/* GitHub Feed Component (§9.4) */
+.github-feed-box {
+  margin: var(--sp-6) 0;
+  border: 1px solid var(--rule);
+  padding: var(--sp-5);
+  background-color: var(--paper);
+}
+
+.github-feed-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--quiet);
+  margin-bottom: var(--sp-4);
+  letter-spacing: 0.02em;
+}
+
+.github-feed-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.github-repo-item {
+  border: 1px solid var(--rule);
+  padding: var(--sp-3) var(--sp-4);
+  background-color: var(--bg);
+}
+
+.github-repo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.github-repo-header a {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.github-repo-header a:hover {
+  text-decoration: underline;
+}
+
+.github-repo-owner {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--quiet);
+}
+
+.github-repo-desc {
+  font-size: 0.9375rem;
+  color: var(--quiet);
+  margin: var(--sp-2) 0;
+  line-height: 1.5;
+}
+
+.github-repo-meta {
+  display: flex;
+  gap: var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--quiet);
+}
+
+/* Live Security Header Table (§8.4) */
+.security-live-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--sp-4);
+}
+
+.security-live-table th,
+.security-live-table td {
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+
+.header-badge-pass {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  background-color: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+
+.header-badge-fail {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  background-color: var(--fault);
+  color: #ffffff;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+/* Persistent Canvas & Dimming (§4.4) */
+.scene-dimmed {
+  opacity: 0.18 !important;
+  pointer-events: none !important;
+  transition: opacity 300ms ease;
+}
+
+.scene-home {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transition: opacity 300ms ease;
+}
+
 /* Reduced motion (§11) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -936,5 +1218,25 @@ textarea {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
+  .wipe-line {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+
+  .has-custom-cursor,
+  .has-custom-cursor body {
+    cursor: auto !important;
+  }
 }
+
 

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "AegisZ",
+    "description": "Zero-knowledge AI gateway with differential privacy and post-quantum audit ledger for IBM Z Datathon.",
+    "language": "Python",
+    "updated_at": "2026-03-28T18:14:22Z",
+    "html_url": "https://github.com/ambulj/AegisZ",
+    "owner": "ambulj"
+  },
+  {
+    "name": "OrgMind",
+    "description": "Organizational knowledge graph with grounded LLM tool loop and FalkorDB OpenCypher.",
+    "language": "Python",
+    "updated_at": "2026-04-02T11:05:40Z",
+    "html_url": "https://github.com/ambulj/OrgMind",
+    "owner": "ambulj"
+  },
+  {
+    "name": "roads",
+    "description": "Road-condition monitoring prototype with DBSCAN spatial clustering and sensor streams.",
+    "language": "Python",
+    "updated_at": "2026-02-19T14:32:10Z",
+    "html_url": "https://github.com/ambulj/roads",
+    "owner": "ambulj"
+  },
+  {
+    "name": "AI-Enhanced-Threat-Detection-System",
+    "description": "Network traffic anomaly detection using Isolation Forest and flow feature extraction.",
+    "language": "Python",
+    "updated_at": "2025-11-14T09:20:15Z",
+    "html_url": "https://github.com/Bloated11/AI-Enhanced-Threat-Detection-System",
+    "owner": "Bloated11"
+  },
+  {
+    "name": "phenom",
+    "description": "Local-first assistant experiment over Ollama quantized language models with modular tools.",
+    "language": "Python",
+    "updated_at": "2026-03-10T16:45:00Z",
+    "html_url": "https://github.com/Bloated11/phenom",
+    "owner": "Bloated11"
+  }
+]

@@ -450,5 +450,64 @@ export function getDiagramSvg(slug, verified = false) {
 `;
   }
 
+  if (slug === 'phenom') {
+    return `
+<svg class="arch-diagram" viewBox="0 0 660 380" width="100%" height="100%" role="img" aria-label="Phenom architecture diagram" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--ink)"/>
+    </marker>
+  </defs>
+  <rect width="660" height="380" fill="none" stroke="var(--rule)" stroke-width="1"/>
+  ${draftNotice}
+
+  <!-- Part 1: Inference Backend -->
+  <g class="diag-part" data-part="1" id="diag-part-1">
+    <rect x="30" y="60" width="170" height="70" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="40" y="84" font-family="var(--font-heading)" font-size="13" font-weight="600" fill="var(--ink)">1. Ollama Inference</text>
+    <text x="40" y="102" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">Quantized local models</text>
+    <text x="40" y="116" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">Token streaming endpoint</text>
+  </g>
+
+  <path d="M 200 95 L 245 95" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Part 2: Dual Interfaces -->
+  <g class="diag-part" data-part="2" id="diag-part-2">
+    <rect x="250" y="60" width="170" height="70" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="260" y="84" font-family="var(--font-heading)" font-size="13" font-weight="600" fill="var(--ink)">2. Desktop Interfaces</text>
+    <text x="260" y="102" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">PyQt5 graphical client</text>
+    <text x="260" y="116" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">Flask local web server</text>
+  </g>
+
+  <path d="M 420 95 L 465 95" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Part 3: Local Memory -->
+  <g class="diag-part" data-part="3" id="diag-part-3">
+    <rect x="470" y="60" width="160" height="70" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="480" y="84" font-family="var(--font-heading)" font-size="13" font-weight="600" fill="var(--ink)">3. Memory Layer</text>
+    <text x="480" y="102" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">SQLite session store</text>
+    <text x="480" y="116" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">JSON flat-file memory</text>
+  </g>
+
+  <path d="M 335 130 L 335 180" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Part 4: Service Modules -->
+  <g class="diag-part" data-part="4" id="diag-part-4">
+    <rect x="250" y="185" width="170" height="70" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="260" y="209" font-family="var(--font-heading)" font-size="13" font-weight="600" fill="var(--ink)">4. Service Modules</text>
+    <text x="260" y="227" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">Hardware hooks</text>
+    <text x="260" y="241" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">Desktop automation</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(30, 320)">
+    <line x1="0" y1="10" x2="30" y2="10" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="38" y="14" font-family="var(--font-heading)" font-size="11" fill="var(--quiet)">Offline-first assistant loop</text>
+  </g>
+</svg>
+`;
+  }
+
   return '';
 }
+
