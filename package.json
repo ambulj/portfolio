@@ -16,7 +16,8 @@
     "check:contrast": "node scripts/check-contrast.mjs",
     "test:gate1": "playwright test tests/gate1.spec.ts",
     "test:gate2": "playwright test tests/gate2-gpu.spec.ts",
-    "test:gate3": "playwright test tests/gate3-ml.spec.ts"
+    "test:gate3": "playwright test tests/gate3-ml.spec.ts",
+    "test:gate4": "playwright test tests/gate4-soc.spec.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",

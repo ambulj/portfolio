@@ -3,6 +3,7 @@ import { Beaker, ExternalLink, Cpu, RefreshCw, Database } from 'lucide-react';
 import MetricsTable from '@/components/project/MetricsTable';
 import DataNoteCallout from '@/components/project/DataNoteCallout';
 import RetrospectiveBlock from '@/components/project/RetrospectiveBlock';
+import SocCommandDeck from '@/components/soc/SocCommandDeck';
 
 export const metadata = {
   title: 'Lab & Experimental Prototypes',
@@ -26,6 +27,14 @@ export default async function LabPage() {
           Exploratory projects, proof-of-concept architectures, and ongoing research into local machine learning inference and offline privacy.
         </p>
       </header>
+
+      {/* Flagship Interactive Prototype: SOC Cyber Warfare Telemetry Visualizer (SOC-01, SOC-02, SOC-03) */}
+      <section className="space-y-3">
+        <DataNoteCallout
+          note="Data Provenance: 100% Client-Side Synthetic Stream. NetFlow v9 & Zeek format simulation with live in-browser ONNX Runtime WASM anomaly classification. Zero external network telemetry requests."
+        />
+        <SocCommandDeck />
+      </section>
 
       {/* Featured Experiment: phenom */}
       {phenom && (
