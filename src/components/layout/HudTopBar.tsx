@@ -3,15 +3,27 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Shield, Terminal, Radio, Eye } from 'lucide-react';
+import { Shield, Terminal, Radio, Eye, Layers } from 'lucide-react';
+import {
+  getReduce3DPreference,
+  setReduce3DPreference,
+  subscribeToReduce3D,
+} from '@/scene/negotiator';
 
 export default function HudTopBar() {
   const pathname = usePathname();
   const [utcTime, setUtcTime] = useState<string>('00:00:00 UTC');
   const [mounted, setMounted] = useState<boolean>(false);
+  const [reduce3d, setReduce3d] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
+    setReduce3d(getReduce3DPreference());
+
+    const unsubscribe = subscribeToReduce3D((enabled) => {
+      setReduce3d(enabled);
+    });
+
     const updateTime = () => {
       const now = new Date();
       setUtcTime(
@@ -20,7 +32,10 @@ export default function HudTopBar() {
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      unsubscribe();
+    };
   }, []);
 
   const navItems = [
@@ -85,6 +100,22 @@ export default function HudTopBar() {
           <Radio className="w-3 h-3 text-accent-cyan" aria-hidden="true" />
           <span>{mounted ? utcTime : '00:00:00 UTC'}</span>
         </div>
+
+        {/* Reduce 3D Toggle */}
+        <button
+          type="button"
+          onClick={() => setReduce3DPreference(!reduce3d)}
+          aria-pressed={reduce3d}
+          title={reduce3d ? '3D graphics reduced to 2D vector' : 'Full 3D WebGPU graphics active'}
+          className={`flex items-center space-x-1 px-2 py-0.5 rounded border text-[11px] transition-colors ${
+            reduce3d
+              ? 'border-accent-amber/50 bg-accent-amber/10 text-accent-amber'
+              : 'border-border-subtle hover:border-accent-cyan text-ink-secondary hover:text-ink-primary'
+          }`}
+        >
+          <Layers className="w-3 h-3" aria-hidden="true" />
+          <span className="hidden md:inline">{reduce3d ? '3D: OFF' : '3D: ON'}</span>
+        </button>
 
         {/* Tactical Terminal Launcher */}
         <Link

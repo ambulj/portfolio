@@ -1,8 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Compass, Cpu, Layers } from 'lucide-react';
+
+const ThreatGlobeDeck = dynamic(() => import('./ThreatGlobeDeck'), {
+  ssr: false,
+});
 
 interface Node {
   id: string;
@@ -60,6 +65,9 @@ export default function CanvasDeckContainer() {
 
       {/* Vector Graph Viewport */}
       <div className="flex-1 relative flex items-center justify-center p-4">
+        {/* Dynamic 3D Threat Deck (Tier 2 WebGPU / Tier 1 WebGL2) */}
+        <ThreatGlobeDeck />
+
         {/* Engineering Background Grid */}
         <div className="absolute inset-0 hud-grid opacity-30 pointer-events-none" />
 

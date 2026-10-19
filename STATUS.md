@@ -4,6 +4,33 @@ This document records the exact verification commands, real terminal outputs, pa
 
 ---
 
+## Phase 2 — R3F 3D Globe & Threat Topology (WebGPU Particles): PASSED (6 / 6 Gate 2 Tests)
+
+| Gate Check | Status | Verification Command | Result |
+| :--- | :--- | :--- | :--- |
+| **1. 3D Canvas Deck & Capability Badge** | **PASS** | `npm run test:gate2` | Mounted with capability badge (`TIER 1 WEBGL2 INSTANCED`) |
+| **2. prefers-reduced-motion Fallback** | **PASS** | `npm run test:gate2` | Immediate Tier 0 SVG fallback with 0 canvas elements created |
+| **3. HUD "Reduce 3D" Persistence** | **PASS** | `npm run test:gate2` | Toggles state, updates localStorage, survives reloads |
+| **4. Node Hover & Screen Telemetry Tooltip** | **PASS** | `npm run test:gate2` | Raycaster projects 3D coordinates to 2D HUD telemetry tooltip |
+| **5. 60 FPS Engine Benchmark** | **PASS** | `npm run test:gate2` | **16.60ms median frame delta (~60.2 FPS)** over 90 animation frames |
+| **6. Multi-Route Context Stability** | **PASS** | `npm run test:gate2` | Single persistent canvas retained across routes with 0 context loss |
+
+### Detailed Phase 2 Verification Output:
+```powershell
+Running 6 tests using 1 worker
+
+  ok 1 [chromium] › GPU-VAL-01: Canvas deck mounts with 3D canvas and capability badge (650ms)
+  ok 2 [chromium] › GPU-VAL-02: prefers-reduced-motion forces immediate Tier 0 SVG fallback with zero canvas elements (348ms)
+  ok 3 [chromium] › GPU-VAL-03: HUD Reduce 3D toggle updates localStorage and switches to Tier 0 SVG instantly (1.2s)
+  ok 4 [chromium] › GPU-VAL-04: Node hover triggers raycaster and displays projected screen-space HUD tooltip (1.9s)
+  ok 5 [chromium] › GPU-VAL-05: 60 FPS performance benchmark over 90 animation frames (2.2s)
+  ok 6 [chromium] › GPU-VAL-06: Route navigation retains single persistent canvas with zero memory context leaks (2.8s)
+
+  6 passed (10.5s)
+```
+
+---
+
 ## Phase 1 Rebuild — Next.js 15 & Cyber-Command HUD: PASSED (20 / 20 Gate 1 Tests)
 
 | Gate Check | Status | Verification Command | Result |
