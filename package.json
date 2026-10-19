@@ -1,29 +1,42 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
-  "description": "Personal portfolio for Ambul Jaiswal",
+  "version": "2.0.0",
+  "description": "Next-Gen AI & Cybersecurity Portfolio for Ambul Jaiswal",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "build:dev": "node scripts/build.mjs --dev",
-    "build:prod": "node scripts/build.mjs --prod",
-    "preview": "node scripts/preview.mjs",
-    "test:gate1": "node scripts/test-gate1.mjs",
-    "test:gate2": "node scripts/test-gate2.mjs",
-    "test:gate3": "node scripts/test-gate3.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "build:dev": "node scripts/check-placeholders.mjs --warn && next build",
+    "build:prod": "node scripts/check-placeholders.mjs --strict && next build && node scripts/check-email-leak.mjs",
+    "check:content": "node scripts/validate-content.mjs",
+    "check:placeholders": "node scripts/check-placeholders.mjs",
+    "check:email-leak": "node scripts/check-email-leak.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
-    "og:generate": "node scripts/generate-og.mjs"
+    "test:gate1": "playwright test tests/gate1.spec.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",
+    "clsx": "2.1.1",
     "gray-matter": "4.0.3",
-    "marked": "18.0.14",
-    "three": "0.186.1"
+    "lucide-react": "1.16.0",
+    "marked": "15.0.7",
+    "next": "15.2.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "tailwind-merge": "3.0.2",
+    "three": "0.186.1",
+    "zod": "3.24.2"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.13.0",
-    "esbuild": "0.28.2",
-    "lighthouse": "13.5.0",
-    "playwright": "1.63.0"
+    "@axe-core/playwright": "4.10.1",
+    "@tailwindcss/typography": "0.5.16",
+    "@types/node": "22.13.4",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "autoprefixer": "10.4.20",
+    "playwright": "1.50.1",
+    "postcss": "8.5.2",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.7.3"
   }
 }
