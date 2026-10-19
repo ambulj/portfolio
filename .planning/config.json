@@ -1,0 +1,20 @@
+{
+  "project_name": "Ambul Jaiswal — Futuristic Portfolio",
+  "domain": "ambul.dev",
+  "mode": "standard",
+  "workflow": {
+    "auto_advance": false,
+    "compact_content": false
+  },
+  "stack": {
+    "framework": "Next.js 15",
+    "ui_library": "React 19",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "graphics_engine": "WebGPU with WGSL Compute Shaders (WebGL fallback)",
+    "client_ml": "ONNX Runtime Web (WASM)",
+    "edge_ai": "Cloudflare Workers AI",
+    "vector_database": "Cloudflare Vectorize",
+    "deployment": "Cloudflare Pages"
+  }
+}
