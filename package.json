@@ -4,11 +4,12 @@
   "description": "Next-Gen AI & Cybersecurity Portfolio for Ambul Jaiswal",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "node scripts/copy-wasm.mjs && next build",
-    "build:dev": "node scripts/check-placeholders.mjs --warn && node scripts/copy-wasm.mjs && next build",
-    "build:prod": "node scripts/check-placeholders.mjs --strict && node scripts/copy-wasm.mjs && next build && node scripts/check-email-leak.mjs",
+    "dev": "node scripts/build-rag-index.mjs && next dev",
+    "build": "node scripts/copy-wasm.mjs && node scripts/build-rag-index.mjs && next build",
+    "build:dev": "node scripts/check-placeholders.mjs --warn && node scripts/copy-wasm.mjs && node scripts/build-rag-index.mjs && next build",
+    "build:prod": "node scripts/check-placeholders.mjs --strict && node scripts/copy-wasm.mjs && node scripts/build-rag-index.mjs && next build && node scripts/check-email-leak.mjs",
     "copy:wasm": "node scripts/copy-wasm.mjs",
+    "build:rag": "node scripts/build-rag-index.mjs",
     "generate:model": "node scripts/generate-onnx-model.mjs",
     "check:content": "node --experimental-strip-types scripts/validate-content.mjs",
     "check:placeholders": "node scripts/check-placeholders.mjs",
@@ -17,7 +18,8 @@
     "test:gate1": "playwright test tests/gate1.spec.ts",
     "test:gate2": "playwright test tests/gate2-gpu.spec.ts",
     "test:gate3": "playwright test tests/gate3-ml.spec.ts",
-    "test:gate4": "playwright test tests/gate4-soc.spec.ts"
+    "test:gate4": "playwright test tests/gate4-soc.spec.ts",
+    "test:gate5": "playwright test tests/gate5-copilot.spec.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",

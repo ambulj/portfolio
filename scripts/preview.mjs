@@ -114,6 +114,76 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Mock /api/copilot SSE Streaming endpoint (AI-01, AI-03)
+  if (pathname === '/api/copilot' && req.method === 'POST') {
+    let bodyStr = '';
+    req.on('data', chunk => bodyStr += chunk);
+    req.on('end', async () => {
+      try {
+        const data = JSON.parse(bodyStr || '{}');
+        let query = (data.message || '').trim();
+        if (!query && Array.isArray(data.messages)) {
+          const lastUser = data.messages.filter(m => m.role === 'user').pop();
+          if (lastUser && lastUser.content) {
+            query = lastUser.content.trim();
+          }
+        }
+
+        res.writeHead(200, {
+          'Content-Type': 'text/event-stream; charset=utf-8',
+          'Cache-Control': 'no-cache, no-transform',
+          'Connection': 'keep-alive'
+        });
+
+        // Load knowledge base
+        const kbPath = path.join(process.cwd(), 'public', 'data', 'knowledge-base.json');
+        let kb = [];
+        if (fs.existsSync(kbPath)) {
+          try {
+            kb = JSON.parse(fs.readFileSync(kbPath, 'utf8'));
+          } catch {}
+        }
+
+        const qLower = query.toLowerCase();
+        let answer = '';
+
+        if (qLower.includes('inferyx')) {
+          answer = 'Inferyx is an automated ML model profiling and data drift detection engine designed for mission-critical production pipelines. It benchmarks distribution shifts, computes Wasserstein distances, and flags data drift before inference degradation. [REF: /work/inferyx]\n\nNote: Source code is private enterprise intellectual property; detailed technical architecture walkthrough is available upon request.';
+        } else if (qLower.includes('aegisz')) {
+          answer = 'AegisZ is a Post-Quantum Cryptographic (PQC) and Zero-Trust architecture designed for hybrid cloud systems. It integrates NIST-standardized quantum-resistant algorithms (ML-KEM / Kyber and ML-DSA / Dilithium) with hardware acceleration. [REF: /work/aegisz]';
+        } else if (qLower.includes('threat') || qLower.includes('anomaly')) {
+          answer = 'The Threat Detection system is an in-browser NetFlow anomaly detection pipeline executing 100% on client hardware via ONNX Runtime Web WASM SIMD, verified by SHA-256 integrity checks. [REF: /work/threat-detection]';
+        } else if (qLower.includes('roadsaarthi')) {
+          answer = 'RoadSaarthi is an edge IoT prototype leveraging YOLOv8 on Raspberry Pi 4 for real-time pothole detection. Important Note: RoadSaarthi is an independent engineering prototype, not an officially deployed government transit system. [REF: /work/roadsaarthi]';
+        } else if (qLower.includes('cert') || qLower.includes('credential')) {
+          answer = 'Ambul Jaiswal holds 10 verified certifications covering cloud architecture, security engineering, and applied machine learning (including AWS, CompTIA, and IBM credentials). [REF: /certifications]';
+        } else {
+          // General grounded query response
+          const match = kb.find(c => query.split(' ').some(w => w.length > 3 && (c.title.toLowerCase().includes(w) || c.content.toLowerCase().includes(w))));
+          if (match) {
+            answer = `Based on verified project documentation for ${match.source}: ${match.title}.\n\n${match.content.slice(0, 280)}... [REF: ${match.ref}]`;
+          } else {
+            answer = `Ambul Jaiswal specializes in security-focused machine learning systems, in-browser edge inference, and zero-trust architectures. Review verified case studies at [REF: /work] or explore interactive prototypes in the Lab at [REF: /lab].`;
+          }
+        }
+
+        // Stream tokens via SSE
+        const words = answer.split(' ');
+        for (let i = 0; i < words.length; i++) {
+          const chunk = words[i] + (i === words.length - 1 ? '' : ' ');
+          res.write(`data: ${JSON.stringify({ response: chunk })}\n\n`);
+          await new Promise(r => setTimeout(r, 15));
+        }
+        res.write('data: [DONE]\n\n');
+        res.end();
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message }));
+      }
+    });
+    return;
+  }
+
   // Normalize pathname: remove trailing slash if present (except for root '/')
   const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
 

@@ -4,6 +4,7 @@ import MetricsTable from '@/components/project/MetricsTable';
 import DataNoteCallout from '@/components/project/DataNoteCallout';
 import RetrospectiveBlock from '@/components/project/RetrospectiveBlock';
 import SocCommandDeck from '@/components/soc/SocCommandDeck';
+import DifferentialPrivacyDemo from '@/components/privacy/DifferentialPrivacyDemo';
 
 export const metadata = {
   title: 'Lab & Experimental Prototypes',
@@ -34,6 +35,11 @@ export default async function LabPage() {
           note="Data Provenance: 100% Client-Side Synthetic Stream. NetFlow v9 & Zeek format simulation with live in-browser ONNX Runtime WASM anomaly classification. Zero external network telemetry requests."
         />
         <SocCommandDeck />
+      </section>
+
+      {/* Interactive Differential Privacy Laplace Mechanism Widget (CONTENT-04) */}
+      <section className="space-y-3">
+        <DifferentialPrivacyDemo />
       </section>
 
       {/* Featured Experiment: phenom */}

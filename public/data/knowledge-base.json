@@ -1,0 +1,421 @@
+[
+  {
+    "id": "about-profile",
+    "source": "About Ambul Jaiswal",
+    "ref": "/about",
+    "title": "Background & Mission",
+    "tags": [
+      "about",
+      "bio",
+      "background",
+      "ai",
+      "cybersecurity",
+      "skills"
+    ],
+    "content": "I'm a third-year B.Tech CSE student in Roorkee. I build machine-learning systems and then try to break them: check the data before training, sign the model before loading it, watch for drift, and show where an answer came from.\r\n\r\nMost of my projects are prototypes on synthetic data, and each page says so. I'm looking for an internship in security-focused data science, remote or on-site."
+  },
+  {
+    "id": "certs-list",
+    "source": "Verified Certifications",
+    "ref": "/certifications",
+    "title": "Professional Certifications & Security Badges",
+    "tags": [
+      "certifications",
+      "credentials",
+      "security",
+      "comptia",
+      "aws",
+      "ibm"
+    ],
+    "content": "Ambul Jaiswal holds 10 verified certifications in machine learning, cybersecurity, and cloud security:\n- undefined (Neo4j, Jun 2025): Skills: N/A\n- undefined (Google, Jun 2025 [[VERIFY: LinkedIn post says Jul 2025]]): Skills: N/A\n- undefined (Cisco, Jun 2025): Skills: N/A\n- undefined (Consulting & Analytics Club, IIT Guwahati, Apr 2025): Skills: N/A\n- undefined (Consulting & Analytics Club, IIT Guwahati, Apr 2026): Skills: N/A\n- undefined (Forage, Jun 2025): Skills: N/A\n- undefined (Forage, Jun 2025): Skills: N/A\n- undefined (Cisco, Jun 2025): Skills: N/A\n- undefined (IBM SkillsBuild, Dec 2024): Skills: N/A\n- undefined (Cognizance, IIT Roorkee, Nov 2024): Skills: N/A"
+  },
+  {
+    "id": "career-timeline",
+    "source": "Career Timeline",
+    "ref": "/about#timeline",
+    "title": "Milestones & Research Timeline",
+    "tags": [
+      "timeline",
+      "experience",
+      "career",
+      "education",
+      "hackathons"
+    ],
+    "content": "Key career milestones and research achievements:\n- Aug 2024: Began B.Tech CSE at UTU (Independent): undefined\n- Nov–Dec 2024: AI/ML workshop and IBM SkillsBuild (Independent): undefined\n- Mar 2025: Hack-N-Win 2.0 (Independent): undefined\n- Apr 2025: Summer Analytics 2025, IIT Guwahati (top 25%) (Independent): undefined\n- May–Jul 2025: Cyber Security Analyst intern, Workstreet (remote) (Independent): undefined\n- Jun–Aug 2025: Cybersecurity intern, NIIT Foundation (remote) (Independent): undefined\n- Jun 2025: Security, Cloud and Graph Certifications (Independent): undefined\n- Dec 2025: Campus Ambassador, Open Source Connect (Independent): undefined\n- Mar 2026: Hack-N-Win 3.0 (Independent): undefined\n- Apr 2026: Summer Analytics 2026; Inferyx public release (Independent): undefined"
+  },
+  {
+    "id": "aegisz-overview",
+    "source": "AegisZ Case Study",
+    "ref": "/work/aegisz",
+    "title": "AegisZ: Overview & Goals",
+    "tags": [
+      "aegisz",
+      "project",
+      "case study",
+      "Backend",
+      "Security",
+      "Frontend",
+      "Ops"
+    ],
+    "content": "AegisZ (prototype). A zero-knowledge AI gateway for clinical and public-welfare records: it strips and tokenises personal data before any model sees it, adds calibrated noise, and records every decision in a tamper-evident, post-quantum-signed ledger.\nData Note: Synthetic records only.\nStack: {\"Backend\":[\"Python 3.11\",\"FastAPI\",\"ONNX Runtime\"],\"Security\":[\"HMAC-SHA3-256\",\"Laplace DP\",\"ML-DSA-65\",\"ML-KEM-768\",\"CycloneDX\"],\"Frontend\":[\"React\",\"Tailwind\",\"WebSockets\"],\"Ops\":[\"Docker\",\"multi-arch images\",\"pytest\"]}",
+    "metrics": [
+      {
+        "measure": "Inference latency",
+        "value": "~380 µs",
+        "data": "Synthetic records",
+        "hardware": "[[VERIFY: measured on what hardware? State if it ran on a laptop CPU with ONNX Runtime rather than IBM Z.]]",
+        "method": "ONNX Runtime single inference",
+        "verified": false
+      },
+      {
+        "measure": "Privacy parameter epsilon",
+        "value": "0.1–5.0",
+        "data": "Synthetic records",
+        "hardware": "Laptop CPU",
+        "method": "Laplace mechanism configuration",
+        "verified": false
+      },
+      {
+        "measure": "Requirement checks",
+        "value": "7 verified",
+        "data": "Automated test harness",
+        "hardware": "CI container",
+        "method": "[[VERIFY: link each to a test.]]",
+        "verified": false
+      }
+    ]
+  },
+  {
+    "id": "aegisz-sec-1",
+    "source": "AegisZ (Problem)",
+    "ref": "/work/aegisz#problem",
+    "title": "AegisZ: Problem",
+    "tags": [
+      "aegisz",
+      "problem",
+      "deep dive"
+    ],
+    "content": "Problem:\nClinical and welfare triage models need personal data to make decisions, but sending raw identifiers to external inference services breaks privacy commitments and exposes systems to extraction attacks. Privacy must be an architectural property of the system rather than an afterthought."
+  },
+  {
+    "id": "aegisz-sec-2",
+    "source": "AegisZ (How it works)",
+    "ref": "/work/aegisz#how-it-works",
+    "title": "AegisZ: How it works",
+    "tags": [
+      "aegisz",
+      "how it works",
+      "deep dive"
+    ],
+    "content": "How it works:\nThe gateway guarantees mathematical privacy and post-quantum integrity at every processing stage:\r\n\r\n1. **Ingress:** Handles clinical records, social welfare applications, and HL7/EDI payloads through an authenticated interface.\r\n2. **Threat detector:** ONNX Runtime engine (combining Isolation Forest and gradient boosting) screening for prompt injection, RBAC privilege escalation, anomalous velocity, and insider abuse before quarantine or dispatch.\r\n3. **PII vault:** HMAC-SHA3-256 format-preserving pseudonymization coupled with Laplace differential privacy injecting calibrated noise (ε between 0.1 and 5.0).\r\n4. **Isolated triage:** Domain inference models process strictly anonymized and sanitized feature tensors.\r\n5. **Audit ledger:** Cryptographic SHA3-512 Merkle hash chain sealed with ML-DSA-65 post-quantum digital signatures (FIPS 204), ML-KEM-768 key encapsulation metadata (FIPS 203), and a public verification endpoint.\r\n6. **CBOM scanner:** CycloneDX 1.6 Cryptographic Bill of Materials scanner auditing dependencies and flagging classical keys vulnerable to harvest-now-decrypt-later vectors.\r\n7. **Command center:** React web UI streaming live audit logs over WebSockets; multi-architecture container images supporting x86_64 and linux/s390x."
+  },
+  {
+    "id": "inferyx-overview",
+    "source": "Inferyx Case Study",
+    "ref": "/work/inferyx",
+    "title": "Inferyx: Overview & Goals",
+    "tags": [
+      "inferyx",
+      "project",
+      "case study",
+      "Backend",
+      "Data and ML",
+      "Frontend",
+      "Ops"
+    ],
+    "content": "Inferyx (prototype). An AutoML studio that keeps going after training: it profiles and repairs data, trains with live telemetry, explains the winner, watches for drift, and exports signed models.\nData Note: [[PLACEHOLDER: which datasets were used for the demo and benchmarks]]\nStack: {\"Backend\":[\"Python 3.11\",\"FastAPI\",\"Celery\",\"Redis\",\"SQLAlchemy\"],\"Data and ML\":[\"Polars\",\"PyArrow\",\"scikit-learn\",\"LightGBM\",\"XGBoost\",\"Optuna\",\"SHAP\",\"ONNX\",\"Safetensors\"],\"Frontend\":[\"React 19\",\"esbuild\",\"Vitest\"],\"Ops\":[\"Docker\",\"Docker Compose\"]}",
+    "metrics": [
+      {
+        "measure": "Test count",
+        "value": "[[PLACEHOLDER: test count]]",
+        "data": "Unit and integration suite",
+        "hardware": "CI container",
+        "method": "pytest automated execution",
+        "verified": false
+      },
+      {
+        "measure": "Profiling time",
+        "value": "[[PLACEHOLDER: profiling time on a named dataset]]",
+        "data": "Benchmark tabular set",
+        "hardware": "Laptop CPU",
+        "method": "Polars single-pass scan",
+        "verified": false
+      },
+      {
+        "measure": "Training duration",
+        "value": "[[PLACEHOLDER: training time]]",
+        "data": "Tabular benchmark",
+        "hardware": "Laptop CPU",
+        "method": "Optuna 50-trial search",
+        "verified": false
+      },
+      {
+        "measure": "Drift alert latency",
+        "value": "[[PLACEHOLDER: drift-alert latency]]",
+        "data": "Synthetic drift stream",
+        "hardware": "Laptop CPU",
+        "method": "PSI threshold evaluation",
+        "verified": false
+      }
+    ]
+  },
+  {
+    "id": "inferyx-sec-1",
+    "source": "Inferyx (Problem)",
+    "ref": "/work/inferyx#problem",
+    "title": "Inferyx: Problem",
+    "tags": [
+      "inferyx",
+      "problem",
+      "deep dive"
+    ],
+    "content": "Problem:\nBuilding the model is not the hard part. Understanding it, trusting it, monitoring it and knowing when it breaks is. Most tools stop once weights are saved; production systems fail after deployment when distribution shifts or unvalidated artifacts run unchecked."
+  },
+  {
+    "id": "inferyx-sec-2",
+    "source": "Inferyx (How it works)",
+    "ref": "/work/inferyx#how-it-works",
+    "title": "Inferyx: How it works",
+    "tags": [
+      "inferyx",
+      "how it works",
+      "deep dive"
+    ],
+    "content": "How it works:\nThe studio guides tabular data from initial ingestion through live inference packaging and production telemetry:\r\n\r\n1. **Studio interface:** React 19 single-page studio across seven views (Overview, Data, Training, Results, Tracking, Monitoring, Tools) managed by four dedicated state contexts.\r\n2. **API gateway:** FastAPI backend providing role-based access control with optional JWT tokens, API keys, and three permission tiers (viewer, editor, admin).\r\n3. **Data engine:** Polars and PyArrow engine executing multi-format ingestion and parallel schema profiling in a single vectorized pass.\r\n4. **Feature engineering:** Leak-free temporal rolling features, calendar extraction, lag generation, and strict TimeSeriesSplit evaluation.\r\n5. **Execution worker:** Dual-mode worker dispatching via Celery and Redis when broker is reachable, falling back to an in-process thread pool with an automatic startup reaper for interrupted jobs.\r\n6. **Training engine:** Optuna Bayesian hyperparameter search streaming real-time metrics over WebSockets to the UI with automatic HTTP polling fallback.\r\n7. **Explainability:** SHAP summary values, permutation feature importances, threshold tuning curves, and comparative model leaderboard.\r\n8. **Signed export:** Standalone bundle secured with HMAC-SHA256 signatures, packaging ONNX, Safetensors, and signed joblib files with a dedicated FastAPI inference service and Dockerfile.\r\n9. **Monitoring:** Continuous PSI (Population Stability Index) and Kolmogorov-Smirnov statistical drift tests dispatching webhook notifications on distribution decay."
+  },
+  {
+    "id": "orgmind-overview",
+    "source": "OrgMind Case Study",
+    "ref": "/work/orgmind",
+    "title": "OrgMind: Overview & Goals",
+    "tags": [
+      "orgmind",
+      "project",
+      "case study",
+      "Backend",
+      "Frontend",
+      "Quality",
+      "Ops"
+    ],
+    "content": "OrgMind (prototype). A company knowledge graph with an agent on top. Every answer cites a source that exists in the graph and that the asker is allowed to see.\nData Note: A synthetic company (\"Northwind Labs\"), labelled as synthetic throughout the UI.\nStack: {\"Backend\":[\"Python 3.11+\",\"FastAPI\",\"SQLAlchemy\",\"arq\",\"Redis\",\"PostgreSQL 16\",\"FalkorDB\",\"LiteLLM\"],\"Frontend\":[\"Next.js 14\",\"React 18\",\"TypeScript\",\"Tailwind\",\"Cytoscape.js\"],\"Quality\":[\"pytest (48 tests)\",\"Ruff\",\"Mypy\",\"pre-commit\"],\"Ops\":[\"Docker Compose\"]}",
+    "metrics": [
+      {
+        "measure": "Automated test suite",
+        "value": "48 tests",
+        "data": "Synthetic repository test suite",
+        "hardware": "CI container",
+        "method": "pytest automated execution",
+        "verified": true
+      },
+      {
+        "measure": "Grounding benchmark",
+        "value": "[[PLACEHOLDER: publish scores]]",
+        "data": "24-question benchmark",
+        "hardware": "Laptop CPU",
+        "method": "Evaluation harness verification",
+        "verified": false
+      },
+      {
+        "measure": "Documented endpoints",
+        "value": "24 endpoints",
+        "data": "FastAPI OpenAPI spec",
+        "hardware": "Local server",
+        "method": "OpenAPI 3.1 schema inspection",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "orgmind-sec-1",
+    "source": "OrgMind (Problem)",
+    "ref": "/work/orgmind#problem",
+    "title": "OrgMind: Problem",
+    "tags": [
+      "orgmind",
+      "problem",
+      "deep dive"
+    ],
+    "content": "Problem:\nEnterprise search and agentic question-answering hallucinate citations or leak privileged documents across organizational silos. An answer without an auditable, permissions-filtered source node in an active knowledge graph is merely a guess."
+  },
+  {
+    "id": "orgmind-sec-2",
+    "source": "OrgMind (How it works)",
+    "ref": "/work/orgmind#how-it-works",
+    "title": "OrgMind: How it works",
+    "tags": [
+      "orgmind",
+      "how it works",
+      "deep dive"
+    ],
+    "content": "How it works:\nThe knowledge graph couples graph database queries with fine-grained access control and grounding checks:\r\n\r\n1. **Ingestion pipeline:** Modular connector framework feeding an eight-stage retryable ingestion queue coordinated by arq workers and Redis.\r\n2. **Dual persistence:** FalkorDB low-latency graph database operating over OpenCypher queries, synchronized with PostgreSQL 16 for identity, workspaces, execution jobs, and immutable audit logs.\r\n3. **Grounded agent:** Provider-agnostic LiteLLM execution loop with strict grounding verification and allow-listed, parameterized Cypher tool execution.\r\n4. **API and protocols:** FastAPI REST service and SSE event streams spanning 24 endpoints under OpenAPI 3.1, coupled with an MCP server exposing 11 query and analysis tools.\r\n5. **Explorer UI:** Next.js 14 application featuring conversational question interface, Cytoscape graph visualization, decision lineage viewer, and peer reviews.\r\n6. **Data governance:** Four authorization roles (admin, editor, viewer, auditor), untrusted-data delimiters neutralizing prompt injection vectors, two-phase role-gated mutations, and bitemporal record supersession instead of in-place deletion."
+  },
+  {
+    "id": "phenom-overview",
+    "source": "phenom Case Study",
+    "ref": "/work/phenom",
+    "title": "phenom: Overview & Goals",
+    "tags": [
+      "phenom",
+      "project",
+      "case study",
+      "Interfaces",
+      "Local AI",
+      "Storage"
+    ],
+    "content": "phenom (prototype). A local-first personal assistant: Flask and PyQt5 front ends over a local model served by Ollama, with a memory layer and a set of small service modules.\nData Note: An experiment in how far one assistant can stretch; the repository has about ninety flat files covering assistant, tracking and home-automation ideas.\nStack: {\"Interfaces\":[\"PyQt5\",\"Flask\"],\"Local AI\":[\"Ollama\",\"Local LLM\"],\"Storage\":[\"SQLite\",\"JSON flat files\"]}",
+    "metrics": [
+      {
+        "measure": "Local response latency",
+        "value": "Hardware dependent",
+        "data": "Local inference streams",
+        "hardware": "Local machine",
+        "method": "Ollama token stream",
+        "verified": false
+      }
+    ]
+  },
+  {
+    "id": "phenom-sec-1",
+    "source": "phenom (Problem)",
+    "ref": "/work/phenom#problem",
+    "title": "phenom: Problem",
+    "tags": [
+      "phenom",
+      "problem",
+      "deep dive"
+    ],
+    "content": "Problem:\nCloud-based virtual assistants send everyday desktop context, notes, and commands to external servers. Exploring how much functionality can be driven purely locally tests privacy boundaries and offline machine-learning utility."
+  },
+  {
+    "id": "phenom-sec-2",
+    "source": "phenom (How it works)",
+    "ref": "/work/phenom#how-it-works",
+    "title": "phenom: How it works",
+    "tags": [
+      "phenom",
+      "how it works",
+      "deep dive"
+    ],
+    "content": "How it works:\nThe project is structured around local inference with modular desktop interfaces:\r\n\r\n1. **Inference backend:** Ollama local model service executing quantized language models on personal hardware.\r\n2. **Interfaces:** Dual desktop access through a PyQt5 graphical interface and a local Flask web dashboard.\r\n3. **Memory system:** Local SQLite database and flat file memory store preserving conversations and state.\r\n4. **Tool modules:** System automation routines, hardware monitoring hooks, and experimental automation scripts."
+  },
+  {
+    "id": "roadsaarthi-overview",
+    "source": "RoadSaarthi Case Study",
+    "ref": "/work/roadsaarthi",
+    "title": "RoadSaarthi: Overview & Goals",
+    "tags": [
+      "roadsaarthi",
+      "project",
+      "case study",
+      "Backend",
+      "ML",
+      "Frontend"
+    ],
+    "content": "RoadSaarthi (prototype). A prototype road-condition platform: it generates road-sensor events, scores each road segment, clusters hotspots spatially, and shows them on a live map with work orders.\nData Note: An independent prototype. It is not an official product of any government body, and its data is synthetic.\nStack: {\"Backend\":[\"Python\",\"FastAPI\",\"SQLAlchemy 2\",\"PostGIS\"],\"ML\":[\"scikit-learn (DBSCAN)\"],\"Frontend\":[\"React 18\",\"TypeScript\",\"Vite\",\"Tailwind\",\"MapLibre GL\",\"ApexCharts\"]}",
+    "metrics": [
+      {
+        "measure": "System benchmarks",
+        "value": "No measured results yet",
+        "data": "[[PLACEHOLDER: real, measured values or leave the table empty with the note 'No measured results yet']]",
+        "hardware": "Laptop / Server",
+        "method": "Pending benchmark run",
+        "verified": false
+      }
+    ]
+  },
+  {
+    "id": "roadsaarthi-sec-1",
+    "source": "RoadSaarthi (Problem)",
+    "ref": "/work/roadsaarthi#problem",
+    "title": "RoadSaarthi: Problem",
+    "tags": [
+      "roadsaarthi",
+      "problem",
+      "deep dive"
+    ],
+    "content": "Problem:\nInfrastructure data only matters if someone acts on it. Raw telemetry from vehicle accelerometers and road cameras often ends up stranded in inspection logs rather than being prioritized, geolocated, and converted into dispatched municipal repair orders."
+  },
+  {
+    "id": "roadsaarthi-sec-2",
+    "source": "RoadSaarthi (How it works)",
+    "ref": "/work/roadsaarthi#how-it-works",
+    "title": "RoadSaarthi: How it works",
+    "tags": [
+      "roadsaarthi",
+      "how it works",
+      "deep dive"
+    ],
+    "content": "How it works:\nThe architecture translates continuous road roughness and pothole events into clustered municipal repairs:\r\n\r\n1. **Event generator:** Synthetic telemetry generator emitting simulated accelerometer and GPS sensor hits every 300 seconds.\r\n2. **Backend API:** FastAPI application utilizing SQLAlchemy 2 over PostgreSQL and PostGIS spatial indexing.\r\n3. **Scoring engine:** Road Condition Index scoring module calculating localized segment degradation [[VERIFY: expand 'RPI']].\r\n4. **Spatial clustering:** Scikit-learn DBSCAN algorithm grouping high-density surface defects into distinct spatial hotspots.\r\n5. **Streaming bus:** WebSocket server broadcasting fresh incident clusters and severity recalculations.\r\n6. **Command UI:** React and MapLibre GL mapping dashboard featuring seven operational views: command center, incident queue, road history, analytics, fleet inspection, work orders, and public reporting."
+  },
+  {
+    "id": "threat-detection-overview",
+    "source": "AI Threat Detection System Case Study",
+    "ref": "/work/threat-detection",
+    "title": "AI Threat Detection System: Overview & Goals",
+    "tags": [
+      "threat-detection",
+      "project",
+      "case study",
+      "Technologies"
+    ],
+    "content": "AI Threat Detection System (prototype). A network-traffic anomaly detector that scores flows with an Isolation Forest, assigns a severity, and raises alerts on a live dashboard.\nData Note: Trained and evaluated on synthetic traffic (85% normal, 15% injected port scans, DDoS, exfiltration and brute force).\nStack: {\"Technologies\":[\"Python\",\"Flask\",\"scikit-learn\",\"Pandas\",\"NumPy\",\"Plotly\",\"SQLite\"]}",
+    "metrics": [
+      {
+        "measure": "Detection accuracy",
+        "value": "~92%",
+        "data": "Synthetic traffic split",
+        "hardware": "Laptop CPU",
+        "method": "[[VERIFY: for each, the dataset split, the rule-based baseline used, and the hardware.]]",
+        "verified": false
+      },
+      {
+        "measure": "False-positive rate",
+        "value": "~3–5%",
+        "data": "Synthetic traffic split",
+        "hardware": "Laptop CPU",
+        "method": "[[VERIFY: baseline comparison]]",
+        "verified": false
+      },
+      {
+        "measure": "Per-flow latency",
+        "value": "<1 ms",
+        "data": "Windowed network flows",
+        "hardware": "Laptop CPU",
+        "method": "Isolation Forest inference bench",
+        "verified": false
+      },
+      {
+        "measure": "False positive reduction",
+        "value": "35% fewer",
+        "data": "Synthetic benchmark",
+        "hardware": "Laptop CPU",
+        "method": "Comparison against rule-based threshold baseline",
+        "verified": false
+      }
+    ]
+  },
+  {
+    "id": "threat-detection-sec-1",
+    "source": "AI Threat Detection System (Problem)",
+    "ref": "/work/threat-detection#problem",
+    "title": "AI Threat Detection System: Problem",
+    "tags": [
+      "threat-detection",
+      "problem",
+      "deep dive"
+    ],
+    "content": "Problem:\nMost attacks look normal until you measure them across multiple statistical dimensions. Rule-based intrusion detection systems miss novel scanning behaviors and generate overwhelming alert volumes when high-throughput network flows fluctuate."
+  },
+  {
+    "id": "threat-detection-sec-2",
+    "source": "AI Threat Detection System (How it works)",
+    "ref": "/work/threat-detection#how-it-works",
+    "title": "AI Threat Detection System: How it works",
+    "tags": [
+      "threat-detection",
+      "how it works",
+      "deep dive"
+    ],
+    "content": "How it works:\nThe pipeline processes continuous network packets into classified flow anomalies:\r\n\r\n1. **Traffic ingestion:** Synthetic network event generator emitting realistic background packets alongside malicious injection vectors.\r\n2. **Flow analyzer:** Windowed streaming buffer extracting seven continuous flow features: port distributions, protocol ratios, packet byte sizes, flow duration, transmission rates, entropy metrics, and total byte volumes.\r\n3. **Anomaly scoring:** Scikit-learn Isolation Forest algorithm calculating multidimensional isolation depths across sliding flow windows.\r\n4. **Severity engine:** Calibrated thresholds mapping isolation scores into actionable low, medium, high, and critical threat levels.\r\n5. **Alert dispatcher:** Notification bus triggering structured security event alerts and incident tracking.\r\n6. **Dashboard:** Flask web application rendering interactive Plotly telemetry, live event feeds, and JSON REST endpoints."
+  }
+]

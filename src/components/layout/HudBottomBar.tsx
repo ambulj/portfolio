@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Activity, Lock, FileText, Code2 } from 'lucide-react';
+import CopilotLauncher from '@/components/copilot/CopilotLauncher';
 
 export default function HudBottomBar() {
   return (
@@ -11,6 +12,10 @@ export default function HudBottomBar() {
           <Activity className="w-3 h-3 text-accent-cyan" aria-hidden="true" />
           <span className="font-semibold tracking-wider">SYS: NOMINAL</span>
         </div>
+
+        <div className="h-3 w-px bg-border-subtle hidden sm:block" />
+
+        <CopilotLauncher />
 
         <div className="h-3 w-px bg-border-subtle hidden sm:block" />
 

@@ -5,6 +5,8 @@ import HudTopBar from '@/components/layout/HudTopBar';
 import HudBottomBar from '@/components/layout/HudBottomBar';
 import CanvasDeckContainer from '@/components/scene/CanvasDeckContainer';
 import ModularDataDeck from '@/components/layout/ModularDataDeck';
+import CopilotTerminal from '@/components/copilot/CopilotTerminal';
+import KonamiIntrusionOverlay from '@/components/easter-eggs/KonamiIntrusionOverlay';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ambul.dev'),
@@ -69,6 +71,12 @@ export default function RootLayout({
 
         {/* HUD Bottom Telemetry Bar */}
         <HudBottomBar />
+
+        {/* Global Neural Research Copilot Terminal Shell */}
+        <CopilotTerminal />
+
+        {/* Global Intrusion Simulation Overlay (Konami Code) */}
+        <KonamiIntrusionOverlay />
       </body>
     </html>
   );

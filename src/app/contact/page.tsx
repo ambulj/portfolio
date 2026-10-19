@@ -2,6 +2,7 @@ import React from 'react';
 import { getSiteConfig } from '@/lib/content/api';
 import EmailRevealButton from '@/components/contact/EmailRevealButton';
 import { Mail, MapPin, Send } from 'lucide-react';
+import DifferentialPrivacyDemo from '@/components/privacy/DifferentialPrivacyDemo';
 
 export const metadata = {
   title: 'Direct Contact & Inquiries',
@@ -145,6 +146,11 @@ export default function ContactPage() {
             <span>TRANSMIT DISPATCH</span>
           </button>
         </form>
+      </section>
+
+      {/* Differential Privacy Mechanism Demo */}
+      <section className="space-y-3">
+        <DifferentialPrivacyDemo />
       </section>
     </article>
   );
