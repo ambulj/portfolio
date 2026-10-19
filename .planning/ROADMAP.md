@@ -13,14 +13,15 @@
 
 ---
 
-## Phase 2: WebGPU Constellation Engine (WGSL Compute Shaders)
+## Phase 2: R3F Interactive 3D Globe & Threat Topology (WebGPU Compute Particles)
 
-**Goal:** Replace basic canvas geometry with a high-performance WebGPU compute shader engine simulating thousands of interactive particles with a WebGL/Canvas fallback.
+**Goal:** Implement an interactive React Three Fiber 3D globe and SOC threat topology with live attack arcs, node inspection, and high-density WebGPU compute particles with WebGL fallback.
 
 ### Deliverables:
-- WebGPU device and adapter initialization pipeline with fallback detection.
-- Custom WGSL compute shaders calculating particle positions, turbulence, and graph node connections in parallel on the GPU.
-- High-resolution rendering pipeline drawing dynamic particle constellations and ray-traced edges.
+- R3F canvas wrapper with WebGPU / WebGL2 capability negotiation and device tier detection.
+- Interactive 3D cyber threat globe rendering active nodes (nodes corresponding to project architectures, threat feeds, and edge points).
+- Dynamic attack arcs and packet trajectories connecting threat nodes with live pulse shaders.
+- Custom WebGPU compute particle field with cursor gravitational lensing and turbulence.
 - Seamless automatic fallback to WebGL / 2D Canvas under `prefers-reduced-motion` or unsupported hardware.
 - Verification: Stable 60fps frame rate, zero GPU memory leaks, and accessible static SVG fallback.
 

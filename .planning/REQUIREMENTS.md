@@ -14,11 +14,11 @@
 - [ ] **ARCH-03**: Clean component hierarchy with layout shell, persistent canvas wrapper, and accessible page transitions.
 - [ ] **ARCH-04**: Deep OLED dark aesthetic with high-contrast cyber-defense color system and IBM Plex typography.
 
-### 2. WebGPU Graphics Engine (`GPU`)
+### 2. 3D Graphics Engine & Threat Topology (`GPU`)
 
-- [ ] **GPU-01**: WebGPU context initialization with device capability negotiation and feature checks.
-- [ ] **GPU-02**: Custom WGSL compute shader executing parallel particle updates (velocity, gravity, noise turbulence) on GPU buffers.
-- [ ] **GPU-03**: Interactive 3D technical constellation scene rendered directly from GPU compute storage buffers.
+- [ ] **GPU-01**: React Three Fiber (R3F) context initialization with WebGPU/WebGL device capability negotiation.
+- [ ] **GPU-02**: Interactive 3D Globe & Threat Topology rendering live simulated SOC attack arcs and node inspection.
+- [ ] **GPU-03**: Custom WebGPU compute particle field with real-time cursor gravitational lensing and velocity buffers.
 - [ ] **GPU-04**: Robust automatic fallback to WebGL / 2D Canvas when WebGPU is unsupported or under `prefers-reduced-motion`.
 
 ### 3. In-Browser Client ML Inference (`ML`)

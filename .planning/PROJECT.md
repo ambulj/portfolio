@@ -47,10 +47,11 @@ To demonstrate undeniable technical mastery in security-focused machine learning
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Next.js 15 + React 19 | High-performance React Server Components, static prerendering with selective edge functions | ✓ Good |
-| WebGPU + WGSL Compute Shaders | State-of-the-art browser graphics and parallel compute for high-density particle simulations | ✓ Good |
-| In-browser ONNX Runtime Web | Eliminates backend inference costs, runs models client-side with zero data leakage | ✓ Good |
-| Cloudflare Workers AI + Vectorize | Ultra-low latency edge LLM reasoning and semantic search over portfolio case studies | ✓ Good |
+| Cyber-Command HUD Theme | Pure OLED black, crisp high-density telemetry, subtle scanlines/grid toggle, monochrome with cyan/amber accents | ✓ Confirmed |
+| Split Command Deck Layout | Persistent 3D threat map / telemetry on one side, modular glass data panels with Cmd+K / CLI overlay on the other | ✓ Confirmed |
+| React Three Fiber (R3F) & WebGPU | Interactive 3D Globe & Threat Topology with live SOC attack arcs, node inspection, and WebGPU compute particles | ✓ Confirmed |
+| Hybrid AI Inference Architecture | In-browser ONNX Runtime Web (WebGPU/WASM) for zero-latency local anomaly scoring + Cloudflare Workers AI for Copilot | ✓ Confirmed |
 | Cloudflare Pages Edge Deployment | Native integration with custom domain `ambul.dev` and Cloudflare edge network | ✓ Good |
 
 ---
-*Last updated: 2026-10-19 after /gsd-new-project initialization*
+*Last updated: 2026-10-19 after user architectural confirmation*
