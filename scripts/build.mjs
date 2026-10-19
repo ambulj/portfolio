@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
 import https from 'node:https';
+import { execSync } from 'node:child_process';
 import Ajv from 'ajv';
 import matter from 'gray-matter';
 import { marked } from 'marked';
@@ -297,6 +298,7 @@ function renderFooter() {
           <li><a href="/contact">Contact</a></li>
           <li><a href="/demos">Demos</a></li>
           <li><a href="/security">Security headers</a></li>
+          <li><a href="/colophon">Colophon</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -312,11 +314,16 @@ function renderFooter() {
         <ul>
           <li><a href="/.well-known/security.txt">security.txt</a></li>
           <li><a href="/security">Security policy</a></li>
+          <li><a href="/colophon">Technical colophon</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>Hand-built with HTML, CSS and a small amount of JavaScript.</div>
+      <div>
+        Hand-built with HTML, CSS and a small amount of JavaScript.
+        <button type="button" class="footer-terminal-link" data-action="open-terminal" aria-label="Open terminal [>]">[&gt;]</button>
+        <span id="secrets-counter-container" class="secrets-counter" hidden></span>
+      </div>
       <div>Last updated ${buildDate}</div>
     </div>
   </footer>
@@ -345,6 +352,38 @@ function renderFooter() {
         <button type="submit" class="btn btn-primary">Send message</button>
       </form>
     </div>
+  </div>
+
+  <!-- Interactive Terminal Window (§10.1) -->
+  <div id="terminal-modal" class="terminal-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Interactive terminal">
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <span class="terminal-title">ambul@portfolio: ~ (bash)</span>
+        <button type="button" id="terminal-close-btn" class="btn" aria-label="Close terminal">Esc</button>
+      </div>
+      <div id="terminal-output" class="terminal-output">
+        <div class="term-line">Ambul Jaiswal Portfolio Shell v1.0.0 (x86_64-pc-none)</div>
+        <div class="term-line">Type &quot;help&quot; for available commands. Press Esc to close.</div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="terminal-prompt">ambul@portfolio:~$</span>
+        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal command prompt">
+      </div>
+    </div>
+  </div>
+
+  <!-- Konami Intrusion Mode Overlay (§10.4) -->
+  <div id="konami-overlay" class="konami-overlay" hidden aria-hidden="true">
+    <div class="konami-box">
+      <div class="konami-title">[IDS INTRUSION DETECTED]</div>
+      <div class="konami-log">
+        <div>&gt; Sequence detected: UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A</div>
+        <div>&gt; Anomaly score: 0.78 (threshold: 0.60) -&gt; FLAGGED</div>
+        <div>&gt; Temporal keystroke cadence outside normal visitor distribution.</div>
+        <div>&gt; Session isolated in sandbox. Press Esc to exit.</div>
+      </div>
+      <button type="button" id="konami-close-btn" class="btn btn-primary mt-4">Dismiss anomaly (Esc)</button>
+    </div>
   </div>`;
 }
 
@@ -352,6 +391,21 @@ function renderHtmlDocument({ title, metaDescription, canonicalPath, content, ac
   const fullTitle = canonicalPath === '/' ? `${siteData.name} · ${siteData.tag}` : `${title} — ${siteData.name}`;
   return `<!DOCTYPE html>
 <html lang="en">
+<!--
+  ======================================================================
+  [AJ] AMBUL JAISWAL — PORTFOLIO WEBSITE
+  Data science x cybersecurity · B.Tech CSE '28
+  ======================================================================
+  Why this site is built this way:
+  Zero frontend frameworks. Pure static HTML prerendered at build time.
+  Strict Content Security Policy. No external CDNs, no tracking cookies.
+  Designed for verification, accessibility, and operational resilience.
+  Colophon: /colophon
+
+  CTF Flag: bW9kZWxzLWZhaWwtcXVpZXRseQ==
+  (Decode the base64 token and unlock in the terminal shell via \` or footer)
+  ======================================================================
+-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -390,6 +444,7 @@ function renderHtmlDocument({ title, metaDescription, canonicalPath, content, ac
 </body>
 </html>`;
 }
+
 
 function writeRoute(routePath, html) {
   let filePath;
@@ -474,9 +529,49 @@ writeRoute('/work', renderHtmlDocument({
   activePath: '/work'
 }));
 
+function getCaseStudyWidget(slug) {
+  if (slug === 'inferyx') {
+    return `
+    <div class="case-study-widget" id="drift-slider-container">
+      <h3>Interactive Drift Simulator (PSI)</h3>
+      <p class="text-small text-quiet mb-3">Adjust distribution drift to observe the Population Stability Index (PSI) calculation across 10 bins.</p>
+      <div class="mb-3">
+        <label for="drift-shift-slider" class="text-small">Distribution Shift (&Delta;&mu;): <strong id="drift-shift-val">0.00</strong></label>
+        <input type="range" id="drift-shift-slider" min="0" max="2.5" step="0.05" value="0" class="w-full">
+      </div>
+      <div class="mb-3">
+        <span class="text-small">Live PSI: <strong id="drift-psi-val">0.000</strong></span> · 
+        <span id="drift-status-badge" class="status-badge-live">Stable (PSI &lt; 0.10)</span>
+      </div>
+      <svg id="drift-svg-chart" viewBox="0 0 500 180" width="100%" height="180" aria-label="PSI drift bar chart"></svg>
+    </div>`;
+  }
+  if (slug === 'aegisz') {
+    return `
+    <div class="case-study-widget" id="tamper-chain-container">
+      <h3>Tamper-Detection Ledger (SHA-256 Merkle Chain)</h3>
+      <p class="text-small text-quiet mb-2">Simplified demonstration of audit ledger integrity. The real ledger uses SHA3-512 and ML-DSA-65.</p>
+      <p class="text-small text-quiet mb-3">Edit any block payload below to observe downstream cryptographic cascade failure.</p>
+      <div id="tamper-chain-status" class="tamper-status status-valid">Chain verified: all 5 blocks cryptographically linked.</div>
+      <div id="tamper-blocks-list" class="tamper-blocks-list"></div>
+    </div>`;
+  }
+  if (slug === 'threat-detection') {
+    return `
+    <div class="case-study-widget" id="anomaly-hunt-container">
+      <h3>Network Flow Anomaly Hunt</h3>
+      <p class="text-small text-quiet mb-2">Seeded scatter of 200 network flows. Click suspected anomalies to evaluate Isolation Forest score.</p>
+      <div id="anomaly-hunt-status" class="text-small font-mono mb-3">Click on any outlier data point to inspect isolation score.</div>
+      <svg id="anomaly-hunt-svg" viewBox="0 0 600 300" width="100%" height="300" aria-label="Network flow anomaly scatter plot"></svg>
+    </div>`;
+  }
+  return '';
+}
+
 // 4.3 Five Case Studies (/work/{slug})
 for (const p of projects) {
   if (p.meta.slug === 'phenom') continue;
+
 
   const diagramSvg = getDiagramSvg(p.meta.slug, p.meta.diagram_verified);
   const metricsRows = p.meta.metrics
@@ -553,6 +648,8 @@ for (const p of projects) {
         <section class="case-study-body" data-arch-part="1">
           ${p.html}
         </section>
+
+        ${getCaseStudyWidget(p.meta.slug)}
 
         <h2>Results</h2>
         <table>
@@ -716,11 +813,35 @@ const currentlyHtml = (aboutParsed.data.currently || [])
   .map(item => `<li>${item}</li>`)
   .join('\n');
 
+const bioHtml = aboutParsed.data.bio
+  .replace(/\n\n/g, '</p><p class="text-large">')
+  .replace(/in Roorkee/g, 'in <button type="button" class="dp-trigger-btn" id="dp-trigger-btn" title="Inspect differential privacy blur">Roorkee, India</button>');
+
+const dpModalHtml = `
+  <div id="dp-modal" class="dp-modal" hidden aria-hidden="true" role="dialog" aria-labelledby="dp-modal-title">
+    <div class="dp-modal-backdrop" id="dp-modal-backdrop"></div>
+    <div class="dp-modal-content">
+      <div class="dp-modal-header flex items-center justify-between mb-3">
+        <h3 id="dp-modal-title" class="m-0 font-heading">Differential Privacy: Location Perturbation</h3>
+        <button type="button" class="btn" id="dp-close-btn" aria-label="Close dialog">&times;</button>
+      </div>
+      <p class="text-small text-quiet mb-3">
+        Public centroid: Roorkee, India (29.8543&deg; N, 77.8880&deg; E). Laplace noise sampled from Laplace(0, b) where scale b = 0.04 / &epsilon;.
+      </p>
+      <div class="mb-3">
+        <label for="dp-epsilon-slider" class="text-small">Privacy Budget (&epsilon;): <strong id="dp-epsilon-val">1.0</strong></label>
+        <input type="range" id="dp-epsilon-slider" min="0.1" max="5.0" step="0.1" value="1.0" class="w-full">
+      </div>
+      <svg id="dp-svg-plot" viewBox="0 0 400 240" width="100%" height="240" aria-label="Differential privacy scatter plot"></svg>
+      <div id="dp-sample-summary" class="text-small font-mono text-quiet mt-2"></div>
+    </div>
+  </div>`;
+
 const aboutContent = `
 <div class="container">
   <h1>About</h1>
   <div class="mt-5">
-    <p class="text-large">${aboutParsed.data.bio.replace(/\n\n/g, '</p><p class="text-large">')}</p>
+    <p class="text-large">${bioHtml}</p>
   </div>
 
   <h2>How I work</h2>
@@ -737,6 +858,8 @@ const aboutContent = `
   <ul class="timeline-list">
     ${timelineItemsHtml}
   </ul>
+
+  ${dpModalHtml}
 </div>`;
 
 writeRoute('/about', renderHtmlDocument({
@@ -1001,6 +1124,141 @@ writeRoute('/security', renderHtmlDocument({
   activePath: '/security'
 }));
 
+// 4.9b Colophon Route (/colophon) (§10.7)
+let gitCommitHash = 'HEAD';
+try {
+  gitCommitHash = execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+} catch (e) {
+  gitCommitHash = 'main';
+}
+
+const colophonContent = `
+<div class="container">
+  <h1>Colophon</h1>
+  <p class="project-summary mt-4">System architecture, exact pinned dependencies, build mechanics, and operational integrity guarantees.</p>
+
+  <div class="section-divider mt-6 mb-6">
+    <h2>Build Integrity & Version Pinning</h2>
+    <p>Every dependency is pinned to an exact release that is at least two weeks old. No external CDN scripts, stylesheets, or remote web fonts are ever loaded.</p>
+    <p class="text-small text-quiet">
+      Generated from commit: <a href="https://github.com/${siteData.github[0]}/commit/${gitCommitHash}" target="_blank" rel="noopener noreferrer" class="font-mono">${gitCommitHash.substring(0, 8)}</a>
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Package / Asset</th>
+          <th scope="col">Role</th>
+          <th scope="col">Pinned Version</th>
+          <th scope="col">Size</th>
+          <th scope="col">License</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>three</code></td>
+          <td>3D technical constellation scene (desktop only)</td>
+          <td><code>0.186.1</code></td>
+          <td>~150 KB (gzip)</td>
+          <td>MIT</td>
+        </tr>
+        <tr>
+          <td><code>IBM Plex Fonts</code></td>
+          <td>Self-hosted typography (Mono, Serif, Sans woff2)</td>
+          <td><code>v6.4.0</code></td>
+          <td>~70 KB total</td>
+          <td>OFL-1.1</td>
+        </tr>
+        <tr>
+          <td><code>esbuild</code></td>
+          <td>Deterministic JavaScript bundling & tree-shaking</td>
+          <td><code>0.28.2</code></td>
+          <td>Build tool</td>
+          <td>MIT</td>
+        </tr>
+        <tr>
+          <td><code>marked</code></td>
+          <td>Content markdown parser (raw HTML disabled)</td>
+          <td><code>18.0.14</code></td>
+          <td>Build tool</td>
+          <td>MIT</td>
+        </tr>
+        <tr>
+          <td><code>gray-matter</code></td>
+          <td>YAML frontmatter parsing</td>
+          <td><code>4.0.3</code></td>
+          <td>Build tool</td>
+          <td>MIT</td>
+        </tr>
+        <tr>
+          <td><code>ajv</code></td>
+          <td>JSON Schema validation for all content files</td>
+          <td><code>8.20.0</code></td>
+          <td>Build tool</td>
+          <td>MIT</td>
+        </tr>
+        <tr>
+          <td><code>playwright</code></td>
+          <td>End-to-end gate and browser verification suite</td>
+          <td><code>1.63.0</code></td>
+          <td>Test tool</td>
+          <td>Apache-2.0</td>
+        </tr>
+        <tr>
+          <td><code>@axe-core/playwright</code></td>
+          <td>Automated WCAG 2.1 AA accessibility auditing</td>
+          <td><code>4.13.0</code></td>
+          <td>Test tool</td>
+          <td>MPL-2.0</td>
+        </tr>
+        <tr>
+          <td><code>lighthouse</code></td>
+          <td>Performance, SEO, and security audits</td>
+          <td><code>13.5.0</code></td>
+          <td>Test tool</td>
+          <td>Apache-2.0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-divider mt-6 mb-6">
+    <h2>Why this isn't built on a frontend framework</h2>
+    <p>
+      This site is built with vanilla HTML, modern CSS, and minimal vanilla JavaScript. There is no React, Vue, Next.js, or Svelte runtime.
+    </p>
+    <ul>
+      <li><strong>Zero hydration overhead:</strong> Every page is prerendered to pure static HTML at build time. First contentful paint is immediate without waiting for client-side JavaScript execution.</li>
+      <li><strong>Reduced supply-chain surface:</strong> A typical modern JS framework introduces hundreds of transitive npm dependencies. By restricting dependencies to four build-time libraries and Three.js, the attack surface is minimized.</li>
+      <li><strong>Predictable runtime security:</strong> Without dynamic eval-based templating or framework runtime abstractions, strict Content Security Policy (no unsafe-inline, no unsafe-eval) is trivial to enforce and audit.</li>
+      <li><strong>Longevity:</strong> Web standards outlive frameworks. Hand-written HTML and CSS will render identically across browser engines a decade from now without requiring maintenance churn.</li>
+    </ul>
+  </div>
+
+  <div class="section-divider mt-6 mb-6">
+    <h2>What happens when JavaScript is turned off</h2>
+    <p>
+      The site adheres to resilient progressive enhancement. If JavaScript is completely disabled in the user agent:
+    </p>
+    <ul>
+      <li>Every page, route, and case study loads seamlessly as static, prerendered semantic HTML.</li>
+      <li>Full text, tables, metrics, and honest data notes remain fully accessible.</li>
+      <li>System architecture diagrams are prerendered as inline SVG and remain visible and crisp.</li>
+      <li>The 3D WebGL constellation gracefully falls back to the server-generated static 2D SVG diagram.</li>
+      <li>Site navigation functions via standard HTML anchor links with zero broken paths.</li>
+      <li>The contact page provides clear direct channels and links.</li>
+    </ul>
+  </div>
+</div>`;
+
+writeRoute('/colophon', renderHtmlDocument({
+  title: 'Colophon',
+  metaDescription: 'Technical details, exact dependency versions, build architecture, and design rationale.',
+  canonicalPath: '/colophon',
+  content: colophonContent,
+  activePath: '/colophon'
+}));
+
 // 4.10 404 Page (/404)
 const notFoundContent = `
 <div class="container pt-8">
@@ -1051,7 +1309,7 @@ const headersContent = `/*
 
 fs.writeFileSync(path.join(DIST_DIR, '_headers'), headersContent, 'utf8');
 
-const redirectsContent = `/colophon /security 302\n`;
+const redirectsContent = `# Cloudflare Pages Redirects\n`;
 fs.writeFileSync(path.join(DIST_DIR, '_redirects'), redirectsContent, 'utf8');
 
 const robotsContent = `User-agent: *
@@ -1083,7 +1341,8 @@ const sitemapUrls = [
   '/resume',
   '/contact',
   '/demos',
-  '/security'
+  '/security',
+  '/colophon'
 ];
 
 

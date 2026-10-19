@@ -1,12 +1,16 @@
-// Main vanilla JavaScript entry point for Ambul Jaiswal's portfolio.
-// Rules: Strict CSP compliance, textContent for all dynamic text, zero third-party CDNs.
-
 import { initRouter } from './router.js';
 import { initCustomCursor } from './cursor.js';
 import { initSound, shiftAmbientPitch } from './sound.js';
 import { initDiagramHighlighting } from './diagram-highlight.js';
 import { initGitHubFeed } from './github.js';
 import { initSecurityCheck } from './security-check.js';
+import { initSecretsManager, unlockSecret } from './secrets-manager.js';
+import { initTerminal } from './terminal.js';
+import { initKonami } from './konami.js';
+import { initTamperChain } from './tamper-chain.js';
+import { initDpBlur } from './dp-blur.js';
+import { initAnomalyHunt } from './anomaly-hunt.js';
+import { initDriftSlider } from './drift-slider.js';
 
 // --- 1. Reduce 3D Switch & Tier Detection (§4.5) ---
 let isReduce3D = localStorage.getItem('reduce3d') === 'true';
@@ -256,6 +260,14 @@ function initPageInteractions(pathname = window.location.pathname) {
   initDiagramHighlighting();
   initSecurityCheck();
   initGitHubFeed();
+  initTamperChain();
+  initDpBlur();
+  initAnomalyHunt();
+  initDriftSlider();
+
+  if (pathname === '/colophon' || pathname.endsWith('/colophon')) {
+    unlockSecret('colophon');
+  }
 }
 
 // Global escape key listener for panel
@@ -280,10 +292,14 @@ window.addEventListener('scroll', () => {
 
 // --- 4. Main Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
+  initSecretsManager();
   initReduce3D();
   initScene();
   initCustomCursor();
   initSound();
+  initTerminal();
+  initKonami();
   initRouter([initPageInteractions]);
   initPageInteractions();
 });
+

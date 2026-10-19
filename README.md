@@ -37,16 +37,18 @@ All dependencies are pinned to exact versions older than two weeks:
 
 ---
 
-## Build Commands
+## Build & Test Commands
 
 | Command | Description |
 | :--- | :--- |
-| `npm run build` | Validates content, bundles assets, prerenders all 14 routes to `dist/`, outputs placeholder audit, and succeeds. |
-| `npm run build:prod` | Runs the production build. **Fails with exit code 1** if any `[[PLACEHOLDER: ...]]` or `[[VERIFY: ...]]` token remains. |
+| `npm run build` | Validates content against schemas, bundles assets with esbuild, prerenders all 16 routes to `dist/`, copies og.png, generates sitemap/robots/headers/security.txt, prints placeholder audit, and succeeds. |
+| `npm run build:prod` | Runs the production build. **Strictly fails with exit code 1** if any `[[PLACEHOLDER: ...]]` or `[[VERIFY: ...]]` token remains in output. |
 | `npm run preview` | Runs the zero-dependency local preview server on `http://localhost:8788`, serving `dist/` with exact production HTTP security headers and contact API simulation. |
-| `npm run test:gate1` | Runs the full Playwright + axe-core automated verification suite against the preview server. |
+| `npm run test:gate1` | Runs the Gate 1 Playwright + axe-core automated verification suite (routes, headers, a11y, JS-disabled, mobile, 3D switch). |
+| `npm run test:gate2` | Runs the Gate 2 automated verification suite (client navigation, View Transitions, wipe line, cursor, Web Audio, GitHub feed snapshot fallback & XSS immunity, live header check). |
+| `npm run test:gate3` | Runs the Gate 3 automated verification suite (all 8 hidden features, zero-cookies check, network request audit, secrets persistence). |
 | `npm run check:contrast` | Verifies design token color pairs against WCAG AA / AAA contrast standards. |
-| `npm run check:links` | Crawls all prerendered internal links and asserts 0 broken routes. |
+| `npm run og:generate` | Generates `public/og.png` using Node SVG rendering. |
 
 ---
 
@@ -122,6 +124,23 @@ The deployed headers include:
 - `Permissions-Policy`: `camera=(), microphone=(), geolocation=(), interest-cohort=()`
 - `Cross-Origin-Opener-Policy`: `same-origin`
 - `Cross-Origin-Resource-Policy`: `same-origin`
+
+---
+
+## Hidden Features & Discovery Engine (§10)
+
+Eight discreet, privacy-respecting browser features are implemented strictly client-side. They make zero external network requests and set zero tracking cookies (`document.cookie === ''`):
+
+1. **Interactive Terminal (`terminal.js`):** Press the backtick key (`` ` ``) or click `[>]` in the footer. Provides shell navigation (`help`, `projects`, `certs`, `contact`, `theme`, `hint`, `secrets`, `unlock`). Inputs are strictly escaped and rendered via `textContent` to prevent DOM XSS. Focus is trapped; Esc closes.
+2. **CTF Passphrase Challenge:** An easter egg comment near the top of the HTML source encodes a base64 puzzle (`bW9kZWxzLWZhaWwtcXVpZXRseQ==`). Decoding it reveals `models-fail-quietly`. Entering `unlock models-fail-quietly` in the terminal verifies against a client-side SHA-256 hash and unlocks the recruiter note.
+3. **Konami IDS Intrusion Mode (`konami.js`):** Key sequence `↑ ↑ ↓ ↓ ← → ← → B A` trips the simulated intrusion detection system, tinting the viewport with an anomaly log. Pulses at a safe 1.0 Hz (strictly $\le 3\text{ Hz}$), is completely suppressed under `prefers-reduced-motion: reduce`, and exits on Esc.
+4. **Tamper-Detection Merkle Ledger (`tamper-chain.js`):** Located on `/work/aegisz`. A 5-block cryptographic hash chain using browser Web Crypto SHA-256. Editing block $i$ causes downstream hashes to fail and flags `chain invalid at block n`.
+5. **Differential Privacy Blur (`dp-blur.js`):** Located in About. Clicking `Roorkee, India` opens a Laplace perturbation modal with an $\varepsilon \in [0.1, 5.0]$ slider and interactive 50-point SVG scatter plot around the public centroid coordinates (`29.8543° N, 77.8880° E`).
+6. **Anomaly Hunt (`anomaly-hunt.js`):** Located on `/work/threat-detection`. An interactive 200-point deterministic network flow scatter plot with 6 outliers. Clicking outlier nodes inspects their Isolation Forest score.
+7. **Drift Simulator (`drift-slider.js`):** Located on `/work/inferyx`. Slide feature distribution shift to compute live Population Stability Index (PSI) across 10 bins: Stable ($< 0.10$), Moderate Warning ($\ge 0.10$), and Critical Alert ($\ge 0.25$).
+8. **Technical Colophon (`/colophon`):** An honest colophon listing all 9 pinned dependencies, exact versions, download sizes, licenses, commit hash link, "Why this isn't on a framework", and "What happens when JavaScript is off".
+
+**Discovery Persistence:** Discovered secrets are tracked in `localStorage.secrets`. The footer counter ("Secrets found: $n$ of 8") stays hidden until the first secret is unlocked and persists across reloads.
 
 ---
 

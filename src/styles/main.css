@@ -84,6 +84,10 @@
     --mark: #F2C500;
     --fault: #FF7A6B;
   }
+
+  .status-badge-live {
+    color: #4ade80;
+  }
 }
 
 /* Base reset */
@@ -848,9 +852,13 @@ textarea {
   margin-bottom: var(--sp-2);
 }
 
-.status-badge-live { color: #2e7d32; font-weight: 600; }
+.status-badge-live { color: #166534; font-weight: 600; }
 .status-badge-slow { color: var(--mark); font-weight: 600; }
 .status-badge-none { color: var(--quiet); }
+
+@media (prefers-color-scheme: dark) {
+  .status-badge-live { color: #4ade80; }
+}
 
 .hidden { display: none !important; }
 .ml-1 { margin-left: var(--sp-1); }
@@ -1210,8 +1218,375 @@ textarea {
   transition: opacity 300ms ease;
 }
 
+/* --- Phase 3: Hidden Features Styles (§10) --- */
+
+/* Terminal Window (§10.1) */
+.terminal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(12, 13, 14, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  box-sizing: border-box;
+}
+
+.terminal-modal[hidden] {
+  display: none !important;
+}
+
+.terminal-window {
+  width: 100%;
+  max-width: 760px;
+  height: 480px;
+  background-color: #0c0d0e;
+  border: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.terminal-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #141618;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #99968f;
+}
+
+.terminal-output {
+  flex: 1;
+  padding: 12px 16px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e8e6df;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #141618;
+  border-top: 1px solid var(--rule);
+  gap: 8px;
+}
+
+.terminal-prompt {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--mark);
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #ffffff;
+  outline: none;
+  caret-color: var(--mark);
+}
+
+.term-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.term-prompt-line {
+  color: var(--mark);
+}
+
+.term-highlight {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.term-success {
+  color: #4ade80;
+}
+
+.term-error {
+  color: var(--fault);
+}
+
+.term-dim {
+  color: #777777;
+}
+
+/* Konami Intrusion Overlay (§10.4) */
+.konami-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(153, 40, 21, 0.25);
+  border: 4px solid var(--fault);
+  z-index: 10500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  box-sizing: border-box;
+}
+
+.konami-overlay[hidden] {
+  display: none !important;
+}
+
+.konami-box {
+  max-width: 600px;
+  background-color: var(--paper);
+  border: 2px solid var(--fault);
+  padding: var(--sp-6);
+  font-family: var(--font-mono);
+}
+
+.konami-title {
+  color: var(--fault);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--sp-4);
+}
+
+.konami-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--ink);
+}
+
+body.konami-active {
+  animation: konamiPulse 1.0s ease-in-out infinite alternate;
+}
+
+/* Steady pulse rate: 1 Hz (1s), strictly never faster than 3 Hz (§10.4) */
+@keyframes konamiPulse {
+  0% {
+    filter: none;
+  }
+  100% {
+    filter: sepia(0.3) hue-rotate(-20deg);
+  }
+}
+
+/* Tamper-Detection Chain (§10.5) */
+.case-study-widget {
+  border: 1px solid var(--rule);
+  padding: var(--sp-5);
+  background-color: var(--paper);
+  margin: var(--sp-6) 0;
+}
+
+.case-study-widget h3 {
+  margin-top: 0;
+  margin-bottom: var(--sp-2);
+}
+
+.tamper-blocks-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin: var(--sp-4) 0;
+}
+
+.tamper-block-card {
+  border: 1px solid var(--rule);
+  padding: var(--sp-3) var(--sp-4);
+  background-color: var(--bg);
+  transition: border-color 0.2s ease;
+}
+
+.tamper-block-card.block-invalid {
+  border-color: var(--fault) !important;
+  background-color: rgba(177, 54, 30, 0.05);
+}
+
+.tamper-block-header {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.block-invalid .tamper-block-header {
+  color: var(--fault);
+}
+
+.tamper-label {
+  display: block;
+  font-size: 11px;
+  color: var(--quiet);
+  margin-bottom: 4px;
+}
+
+.tamper-input {
+  width: 100%;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border: 1px solid var(--rule);
+  background-color: var(--paper);
+  color: var(--ink);
+  box-sizing: border-box;
+  margin-bottom: 6px;
+}
+
+.tamper-hash-row {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--quiet);
+}
+
+.tamper-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+}
+
+.tamper-status.status-valid {
+  border-color: #4ade80;
+  color: #166534;
+  background-color: #f0fdf4;
+}
+
+.tamper-status.status-fault {
+  border-color: var(--fault);
+  color: #ffffff;
+  background-color: var(--fault);
+}
+
+/* Differential Privacy Modal (§10.6) */
+.dp-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+}
+
+.dp-modal[hidden] {
+  display: none !important;
+}
+
+.dp-modal-content {
+  max-width: 500px;
+  width: 100%;
+  background-color: var(--paper);
+  border: 1px solid var(--rule);
+  padding: var(--sp-5);
+  box-sizing: border-box;
+}
+
+.dp-trigger-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dp-trigger-btn:hover {
+  color: var(--mark);
+}
+
+.scatter-point {
+  cursor: pointer;
+}
+
+/* Secrets Toast & Footer Counter (§10) */
+.secret-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--ink);
+  border: 1px solid var(--rule);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 8px 16px;
+  z-index: 12000;
+  box-shadow: none;
+  animation: toastSlide 0.3s ease-out;
+}
+
+.secret-toast.toast-fade {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes toastSlide {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.secrets-counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: 2px 8px;
+  margin-left: 12px;
+}
+
+.footer-terminal-link {
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--quiet);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 2px 6px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.footer-terminal-link:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
 /* Reduced motion (§11) */
 @media (prefers-reduced-motion: reduce) {
+  body.konami-active {
+    animation: none !important;
+  }
+  .konami-overlay {
+    display: none !important;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
