@@ -14,26 +14,31 @@ export type Metric = z.infer<typeof MetricSchema>;
 export const ProjectFrontmatterSchema = z.object({
   title: z.string(),
   slug: z.string(),
-  order: z.number(),
-  summary: z.string(),
-  status: z.string(),
+  order: z.number().optional().default(99),
+  summary: z.string().optional().default(''),
+  status: z.string().optional().default('Active'),
   data_note: z.string().optional(),
   repo_url: z.string().nullable().optional(),
   repo_private: z.boolean().optional().default(false),
   demo_url: z.string().nullable().optional(),
   demo_status: z.string().optional(),
-  demo_note: z.string().optional(),
+  demo_note: z.string().nullable().optional(),
   diagram_verified: z.boolean().optional().default(false),
-  stack: z.array(z.string()),
+  stack: z.union([
+    z.array(z.string()),
+    z.record(z.string(), z.array(z.string())),
+  ]),
   metrics: z.array(MetricSchema).optional().default([]),
   changes: z.array(z.string()).optional(),
   hardening_status: z.string().optional(),
   authorship_note: z.string().optional(),
+  architecture_diagram: z.string().optional(),
 });
 
 export type ProjectFrontmatter = z.infer<typeof ProjectFrontmatterSchema>;
 
-export interface Project extends ProjectFrontmatter {
+export interface Project extends Omit<ProjectFrontmatter, 'stack'> {
+  stack: Record<string, string[]> | string[];
   contentHtml: string;
   rawMarkdown: string;
 }
@@ -45,7 +50,7 @@ export const CertSchema = z.object({
   url: z.string().nullable().optional(),
   credential_id: z.string().nullable().optional(),
   featured: z.boolean().optional().default(false),
-  attach_to: z.array(z.string()).nullable().optional(),
+  attach_to: z.union([z.string(), z.array(z.string())]).nullable().optional(),
   verified: z.boolean().optional().default(false),
 });
 
@@ -58,10 +63,10 @@ export const SiteSchema = z.object({
   location: z.string(),
   work_mode: z.string(),
   email_parts: z.tuple([z.string(), z.string()]),
-  calendar_url: z.string(),
+  calendar_url: z.string().optional().default(''),
   domain: z.string(),
-  linkedin: z.string(),
-  github: z.string(),
+  linkedin: z.string().optional().default(''),
+  github: z.union([z.string(), z.array(z.string())]),
 });
 
 export type SiteConfig = z.infer<typeof SiteSchema>;
