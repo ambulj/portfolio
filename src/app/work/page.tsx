@@ -79,7 +79,7 @@ export default async function WorkIndexPage() {
                     </span>
                   ))}
                   {stackList.length > 5 && (
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 text-ink-secondary/70">
+                    <span className="text-[10px] font-mono px-2 py-0.5 bg-black/40 text-ink-secondary border border-border-subtle/80 rounded">
                       +{stackList.length - 5}
                     </span>
                   )}

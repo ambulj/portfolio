@@ -4,6 +4,49 @@ This document records the exact verification commands, real terminal outputs, pa
 
 ---
 
+## Phase 1 Rebuild — Next.js 15 & Cyber-Command HUD: PASSED (20 / 20 Gate 1 Tests)
+
+| Gate Check | Status | Verification Command | Result |
+| :--- | :--- | :--- | :--- |
+| **1. Zod Content Schema Validation** | **PASS** | `npm run check:content` | 10 content files (Markdown + JSON) validated against strict schemas |
+| **2. Placeholder Invariant Check** | **PASS** | `npm run check:placeholders` | 28 placeholder / verify tokens preserved without fact invention |
+| **3. Email Leak Invariant** | **PASS** | `npm run check:email-leak` | 0 occurrences of plaintext email in `out/` (client-side reveal only) |
+| **4. Next.js 15 Static Export** | **PASS** | `npm run build` | 100% of 17 routes pre-rendered to `out/` with zero hydration errors |
+| **5. Playwright E2E & Route Integrity** | **PASS** | `npx playwright test tests/gate1.spec.ts` | 20 passed (15 routes 200/404, single `h1`, 0 console errors) |
+| **6. WCAG AA Accessibility & axe-core** | **PASS** | `npx playwright test tests/gate1.spec.ts` | 0 critical or serious axe-core violations on key routes |
+| **7. Keyboard Navigation & Skip Link** | **PASS** | `npx playwright test tests/gate1.spec.ts` | Skip link targets `#main-content` and shifts focus cleanly |
+| **8. Honesty Features Integrity** | **PASS** | `npx playwright test tests/gate1.spec.ts` | RoadSaarthi prototype disclaimer, Inferyx walkthrough notice, 5-col metrics tables & data notes verified |
+
+### Detailed Phase 1 Verification Output:
+```powershell
+Running 20 tests using 1 worker
+
+  ok 1 [chromium] › Route / returns valid status, exactly one h1, and zero console errors
+  ok 2 [chromium] › Route /work returns valid status, exactly one h1, and zero console errors
+  ok 3 [chromium] › Route /work/inferyx returns valid status, exactly one h1, and zero console errors
+  ok 4 [chromium] › Route /work/aegisz returns valid status, exactly one h1, and zero console errors
+  ok 5 [chromium] › Route /work/orgmind returns valid status, exactly one h1, and zero console errors
+  ok 6 [chromium] › Route /work/threat-detection returns valid status, exactly one h1, and zero console errors
+  ok 7 [chromium] › Route /work/roadsaarthi returns valid status, exactly one h1, and zero console errors
+  ok 8 [chromium] › Route /lab returns valid status, exactly one h1, and zero console errors
+  ok 9 [chromium] › Route /about returns valid status, exactly one h1, and zero console errors
+  ok 10 [chromium] › Route /certifications returns valid status, exactly one h1, and zero console errors
+  ok 11 [chromium] › Route /resume returns valid status, exactly one h1, and zero console errors
+  ok 12 [chromium] › Route /contact returns valid status, exactly one h1, and zero console errors
+  ok 13 [chromium] › Route /security returns valid status, exactly one h1, and zero console errors
+  ok 14 [chromium] › Route /colophon returns valid status, exactly one h1, and zero console errors
+  ok 15 [chromium] › Route /404 returns valid status, exactly one h1, and zero console errors
+  ok 16 [chromium] › Skip link targets #main-content and shifts focus properly
+  ok 17 [chromium] › Axe-core accessibility audit reports 0 critical or serious violations on key routes
+  ok 18 [chromium] › RoadSaarthi displays mandatory independent prototype disclaimer
+  ok 19 [chromium] › Inferyx displays private walkthrough notice instead of broken repo
+  ok 20 [chromium] › Case studies render 5-column audited metrics tables and data notes
+
+  20 passed (11.3s)
+```
+
+---
+
 ## Gate 1 — Core Status: PASSED (12 / 12 items)
 
 | Gate Check | Status | Verification Command | Result |

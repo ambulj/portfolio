@@ -1,0 +1,5 @@
+Contact: https://ambul.dev/contact
+Canonical: https://ambul.dev/.well-known/security.txt
+Policy: https://ambul.dev/security
+Preferred-Languages: en
+Expires: 2027-12-31T23:59:59.000Z

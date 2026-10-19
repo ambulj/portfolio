@@ -29,7 +29,7 @@ export default function HudBottomBar() {
           <span>RESUME</span>
         </Link>
 
-        <Link 
+        <a 
           href="/.well-known/security.txt" 
           className="hidden sm:flex items-center space-x-1 hover:text-ink-primary transition-colors"
           target="_blank"
@@ -37,7 +37,7 @@ export default function HudBottomBar() {
         >
           <Lock className="w-3 h-3 text-accent-amber" aria-hidden="true" />
           <span>SECURITY.TXT</span>
-        </Link>
+        </a>
 
         <Link 
           href="/colophon" 

@@ -54,11 +54,20 @@ export default function ResumePage() {
         </div>
 
         <div className="w-full h-[650px] border border-border-subtle rounded bg-deck overflow-hidden corner-bracket">
-          <iframe
-            src="/resume.pdf"
+          <object
+            data="/resume.pdf"
+            type="application/pdf"
             title="Ambul Jaiswal Resume"
             className="w-full h-full border-none"
-          />
+          >
+            <p className="p-4 text-sm font-mono text-ink-secondary">
+              Your browser does not support inline PDF viewing. Please{' '}
+              <a href="/resume.pdf" download="Ambul_Jaiswal_Resume.pdf" className="text-accent-cyan underline">
+                download the resume
+              </a>{' '}
+              to view it.
+            </p>
+          </object>
         </div>
       </section>
 

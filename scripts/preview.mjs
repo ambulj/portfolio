@@ -6,7 +6,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8788;
-const DIST_DIR = path.join(process.cwd(), 'dist');
+const DIST_DIR = fs.existsSync(path.join(process.cwd(), 'out'))
+  ? path.join(process.cwd(), 'out')
+  : path.join(process.cwd(), 'dist');
 
 // Parse _headers
 function loadHeadersMap() {
@@ -48,6 +50,8 @@ function getHeadersForPath(urlPath) {
   for (const rule of headerRules) {
     if (rule.pattern === '/*' || rule.pattern === '/*.*') {
       Object.assign(result, rule.headers);
+    } else if (rule.pattern === urlPath) {
+      Object.assign(result, rule.headers);
     } else if (rule.pattern.endsWith('/*')) {
       const prefix = rule.pattern.slice(0, -2);
       if (urlPath.startsWith(prefix)) {
@@ -77,7 +81,13 @@ const MIME_TYPES = {
 
 const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://localhost:${PORT}`);
-  let pathname = parsedUrl.pathname;
+  let rawPathname = parsedUrl.pathname;
+  let pathname;
+  try {
+    pathname = decodeURIComponent(rawPathname);
+  } catch {
+    pathname = rawPathname;
+  }
 
   // Mock /api/contact endpoint (§8.1)
   if (pathname === '/api/contact' && req.method === 'POST') {
@@ -101,18 +111,24 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Resolve file path
-  let filePath = path.join(DIST_DIR, pathname);
+  // Normalize pathname: remove trailing slash if present (except for root '/')
+  const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
 
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(filePath, 'index.html');
-  } else if (!fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
+  // Resolve file path
+  let filePath = path.join(DIST_DIR, cleanPath);
+
+  if (cleanPath === '/') {
+    filePath = path.join(DIST_DIR, 'index.html');
+  } else if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    // Direct file exists (e.g., .css, .js, .svg, robots.txt)
+  } else if (fs.existsSync(filePath + '.html') && fs.statSync(filePath + '.html').isFile()) {
+    // Clean route mapped to static HTML (e.g., /work -> out/work.html, /work/inferyx -> out/work/inferyx.html)
     filePath = filePath + '.html';
-  } else if (!fs.existsSync(filePath) && fs.existsSync(path.join(filePath, 'index.html'))) {
+  } else if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory() && fs.existsSync(path.join(filePath, 'index.html'))) {
     filePath = path.join(filePath, 'index.html');
   }
 
-  if (pathname === '/404' || pathname === '/404.html' || !fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+  if (cleanPath === '/404' || cleanPath === '/404.html' || !fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
     filePath = path.join(DIST_DIR, '404.html');
     res.statusCode = 404;
   } else {
